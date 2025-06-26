@@ -2,7 +2,7 @@ import { enviroment, fetchTimeoutServices, maxRetriesServices } from "@config/en
 import { IStaffPortalByBusinessManager } from "@ptypes/staffPortalBusiness.types";
 import { mapStaffPortalByBusinessManagerApiToEntities } from "./mappers";
 
-const staffPortalByBusinessManager = async (): Promise<IStaffPortalByBusinessManager[]> => {
+const staffPortalByBusinessManager = async (portalCode: string): Promise<IStaffPortalByBusinessManager[]> => {
   const maxRetries = maxRetriesServices;
   const fetchTimeout = fetchTimeoutServices;
 
@@ -20,8 +20,12 @@ const staffPortalByBusinessManager = async (): Promise<IStaffPortalByBusinessMan
         signal: controller.signal,
       };
 
+      const queryParams = new URLSearchParams({
+    staffPortalId: portalCode,
+  });
+
       const res = await fetch(
-        `${enviroment.IVITE_ISAAS_QUERY_PROCESS_SERVICE}/staff-portals-by-business-manager`,
+        `${enviroment.IVITE_ISAAS_QUERY_PROCESS_SERVICE}/staff-portals-by-business-manager?${queryParams.toString()}`,
         options
       );
 

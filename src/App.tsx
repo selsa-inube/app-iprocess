@@ -19,12 +19,10 @@ import { StartProcessRoutes } from "./routes/startProcess";
 import { ValidateProgressRoutes } from "./routes/validateProgress";
 import { theme } from "./config/theme";
 import { AppContext, AppContextProvider } from "./context/AppContext";
-import { usePortalData } from "./hooks/usePortalData";
-import { useBusinessManagers } from "./hooks/useBusinessManagers";
-import { useAuthRedirect } from "./hooks/useAuthRedirect";
 import { SelectBusinessUnits } from "./pages/selectBusinessUnits";
 import { SelectBusinessUnitsRoutes } from "./routes/selectBusinessunits";
 import { Home } from "./pages/home";
+import { useAppData } from "./hooks/useAppData";
 
 function LogOut() {
   localStorage.clear();
@@ -69,30 +67,22 @@ const params = new URLSearchParams(url.search);
 const portalCode = params.get("portal");
 
 function App() {
-  const { portalData, hasError: portalError } = usePortalData();
-  const { businessManagersData, hasError: businessError } = useBusinessManagers(
-    portalData,
-    portalCode
+   const { hasError, isLoading, isAuthenticated, errorCode } = useAppData(
+    portalCode,
   );
-  const {
-    hasError: authError,
-    isLoading,
-    isAuthenticated,
-  } = useAuthRedirect(portalData, businessManagersData, portalCode);
-
-  const hasError = portalError || businessError || authError;
 
   if (isLoading) {
     return null;
   }
 
   if (hasError && !isAuthenticated) {
-    return <ErrorPage />;
+    return <ErrorPage errorCode={errorCode} />;
   }
 
   if (!isAuthenticated) {
     return null;
   }
+
 
   return (
     <>

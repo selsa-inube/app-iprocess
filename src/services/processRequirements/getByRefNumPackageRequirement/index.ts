@@ -29,7 +29,7 @@ const refNumPackageRequirement = async (
       };
 
       const res = await fetch(
-        `${enviroment.IREQUER_API_URL_QUERY}/package-requirements-management/${uniqueRefNumber}`,
+        `${enviroment.IPROCESS_API_URL_QUERY}/iprocess-package-requirements-management/${uniqueRefNumber}`,
         options
       );
 

@@ -15,7 +15,7 @@ import { requirementsNotMet } from "../config/tablesRequirements.config";
 interface ApprovalProps {
   dataListOfRequirements: IListOfRequirementsByPackage;
   packageId: string;
-  setLoadDataTable:(show:boolean) => void;
+  setLoadDataTable: (show: boolean) => void;
 }
 
 const Approval = (props: ApprovalProps) => {
@@ -24,8 +24,17 @@ const Approval = (props: ApprovalProps) => {
   const [showProgressModal, setShowProgressModal] = useState(false);
   const [responseApproval, setResponseApproval] = useState<IApprovalResponse>();
   const [fieldsEntered, setFieldsEntered] = useState<IApprovalEntry>();
-const {appData} = useContext(AppContext);
+  const { appData } = useContext(AppContext);
   const { addFlag } = useFlag();
+
+  console.log("dataApproval", {
+    packageId: packageId,
+    modifyJustification: "ddd",
+    requirementModifyDate: formatDateEndpoint(
+      new Date(dataListOfRequirements.requirementDate)
+    ),
+    requirementPackageId: dataListOfRequirements.requirementPackageId,
+  });
 
   const handleApproval = async () => {
     const justification = `Actualizado por el usuario ${appData.user.userName} del gestor de procesos INUBE - ${fieldsEntered?.observation}`;
@@ -33,14 +42,21 @@ const {appData} = useContext(AppContext);
     const dataApproval = {
       packageId: packageId,
       modifyJustification: justification,
-      requirementModifyDate: formatDateEndpoint(new Date(dataListOfRequirements.requirementDate)),
+      requirementModifyDate: formatDateEndpoint(
+        new Date(dataListOfRequirements.requirementDate)
+      ),
       requirementPackageId: dataListOfRequirements.requirementPackageId,
     };
+
+    console.log("dataApproval", dataApproval);
     try {
       setShowModal(!showModal);
       setShowProgressModal(true);
-      const newApproval = await approvalRequirement(appData.businessUnit.publicCode, dataApproval);
-      setResponseApproval(newApproval);  
+      const newApproval = await approvalRequirement(
+        appData.businessUnit.publicCode,
+        dataApproval
+      );
+      setResponseApproval(newApproval);
     } catch (error) {
       setShowProgressModal(false);
       addFlag({

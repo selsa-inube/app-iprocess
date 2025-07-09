@@ -57,6 +57,8 @@ const DetailModal = (props: DetailModalProps) => {
 
   const partOfLabels = labels.length - 1;
 
+  const isField= (field: ILabel ) =>  data[field.id]
+
   if (!node) {
     throw new Error(
       "The portal node is not defined. This can occur when the specific node used to render the portal has not been defined correctly."
@@ -83,7 +85,7 @@ const DetailModal = (props: DetailModalProps) => {
               <StyledDataContainer>
                 {labels.slice(0, partOfLabels).map(
                   (field, id) =>
-                    data[field.id] && (
+                    isField(field) && (
                       <StyledModalFields key={id} $smallScreen={isMobile}>
                         <Label
                           htmlFor={field.id}
@@ -108,7 +110,7 @@ const DetailModal = (props: DetailModalProps) => {
 
                 {labels.slice(partOfLabels).map(
                   (field, id) =>
-                    data[field.id] && (
+                    isField(field) && (
                       <Stack key={id} gap={tokens.spacing.s200}>
                         <Label
                           htmlFor={field.id}

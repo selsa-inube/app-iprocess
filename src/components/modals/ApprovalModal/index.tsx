@@ -15,6 +15,7 @@ interface ApprovalModalProps {
   setFieldEntered: (show: IApprovalEntry) => void; 
   onCloseModal: () => void;
   onConfirm: () => void;
+  handleToggle: () => void;
 }
 
 const initialValues: IApprovalEntry = {
@@ -22,7 +23,7 @@ const initialValues: IApprovalEntry = {
 };
 
 const ApprovalModal = (props: ApprovalModalProps) => {
-  const { portalId, approvalChecked, setFieldEntered, onCloseModal, onConfirm } = props;
+  const { portalId, approvalChecked, setFieldEntered, onCloseModal, onConfirm, handleToggle } = props;
   const [loading] = useState(false);
 
   const formik = useFormik({
@@ -54,6 +55,7 @@ const ApprovalModal = (props: ApprovalModalProps) => {
       portalId={portalId}
       handleConfirm={onConfirm}
       onCloseModal={onCloseModal}
+      handleToggle={handleToggle}
     />
   );
 };

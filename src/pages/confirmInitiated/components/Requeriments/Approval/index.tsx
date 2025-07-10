@@ -27,14 +27,7 @@ const Approval = (props: ApprovalProps) => {
   const { appData } = useContext(AppContext);
   const { addFlag } = useFlag();
 
-  console.log("dataApproval", {
-    packageId: packageId,
-    modifyJustification: "ddd",
-    requirementModifyDate: formatDateEndpoint(
-      new Date(dataListOfRequirements.requirementDate)
-    ),
-    requirementPackageId: dataListOfRequirements.requirementPackageId,
-  });
+  const [toggle, setToggle] = useState(false);
 
   const handleApproval = async () => {
     const justification = `Actualizado por el usuario ${appData.user.userName} del gestor de procesos INUBE - ${fieldsEntered?.observation}`;
@@ -47,8 +40,6 @@ const Approval = (props: ApprovalProps) => {
       ),
       requirementPackageId: dataListOfRequirements.requirementPackageId,
     };
-
-    console.log("dataApproval", dataApproval);
     try {
       setShowModal(!showModal);
       setShowProgressModal(true);
@@ -83,14 +74,22 @@ const Approval = (props: ApprovalProps) => {
     setShowModal(!showModal);
   };
 
-  const isApprovalRequirement = !requirementsNotMet.includes(
-    dataListOfRequirements.requirementStatus
-  );
+  useEffect(() => {
+    const isApprovalRequirement = !requirementsNotMet.includes(
+      dataListOfRequirements.requirementStatus
+    );
+
+    setToggle(isApprovalRequirement);
+  }, []);
+
+  const handleToggle = () => {
+    setToggle(!toggle);
+  };
 
   return (
     <>
       <Icon
-        appearance="dark"
+        appearance={ComponentAppearance.DARK}
         icon={<MdOutlineCheckCircle />}
         size="16px"
         onClick={handleToggleModal}
@@ -100,10 +99,11 @@ const Approval = (props: ApprovalProps) => {
       {showModal && (
         <ApprovalModal
           portalId="portal"
-          approvalChecked={isApprovalRequirement}
+          approvalChecked={toggle}
           onCloseModal={handleToggleModal}
           onConfirm={handleApproval}
           setFieldEntered={setFieldsEntered}
+          handleToggle={handleToggle}
         />
       )}
       {showProgressModal && (

@@ -29,6 +29,7 @@ interface ApprovalModalUIProps {
   approvalChecked: boolean;
   onCloseModal: () => void;
   handleConfirm: () => void;
+  handleToggle: () => void;
 }
 
 const ApprovalModalUI = (props: ApprovalModalUIProps) => {
@@ -40,6 +41,7 @@ const ApprovalModalUI = (props: ApprovalModalUIProps) => {
     portalId,
     handleConfirm,
     onCloseModal,
+    handleToggle,
   } = props;
 
   const getFieldState = (formik: FormikValues, fieldName: string) => {
@@ -79,7 +81,7 @@ const ApprovalModalUI = (props: ApprovalModalUIProps) => {
                   id="approval"
                   margin="0px"
                   name="approval"
-                  onChange={() => {}}
+                  onChange={handleToggle}
                   padding="0px"
                   size="large"
                   value={"approval"}

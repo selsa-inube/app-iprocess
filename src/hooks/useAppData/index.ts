@@ -18,6 +18,8 @@ const useAppData = (
       hasError: portalError,
       errorCode: errorCodePortal,
     } = usePortalData(portalCode);
+
+    console.log({portalData});
     const {
       businessManagersData,
       hasError: businessError,

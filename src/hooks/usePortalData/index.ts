@@ -27,9 +27,9 @@ const usePortalData = (portalCode: string | null) => {
           setErrorCode(1001);
           return;
         }
-
+console.log({StaffPortalData, }, enviroment.PORTAL_CATALOG_ID);
         if (
-          StaffPortalData[0].staffPortalCatalogId !==
+          StaffPortalData[0].staffPortalCatalogCode !==
           enviroment.PORTAL_CATALOG_ID
         ) {
           setHasError(true);

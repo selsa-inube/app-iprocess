@@ -30,6 +30,8 @@ const MoreDetailsModal = (props: MoreDetailsModalProps) => {
 
   const node = document.getElementById(portalId);
 
+  const isField = (field: ILabel) => data[field.id];
+
   if (!node) {
     throw new Error(
       "The portal node is not defined. This can occur when the specific node used to render the portal has not been defined correctly."
@@ -55,7 +57,7 @@ const MoreDetailsModal = (props: MoreDetailsModalProps) => {
 
               {labels.map(
                 (field, id) =>
-                  data[field.id] && (
+                  isField(field) && (
                     <StyledModalFields key={id} $smallScreen={isMobile}>
                       <Label
                         htmlFor={field.id}

@@ -2,8 +2,8 @@ import { Meta } from "@storybook/react";
 
 import selsaLogo from "@assets/images/selsa.png";
 import errorImage from "@assets/images/timeout.png";
-
-import { ErrorPage, ErrorPageProps } from "./index";
+import { IErrorPage } from "@ptypes/design/IErrorPage";
+import { ErrorPage } from "./index";
 
 
 const meta: Meta<typeof ErrorPage> = {
@@ -12,7 +12,7 @@ const meta: Meta<typeof ErrorPage> = {
 
 };
 
-export const Default = (args: ErrorPageProps) => <ErrorPage {...args} />;
+export const Default = (args: IErrorPage) => <ErrorPage {...args} />;
 
 Default.args = {
   logo: selsaLogo,

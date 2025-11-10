@@ -4,7 +4,7 @@ import { mapBusinessManagerApiToEntity } from "./mappers";
 
 
 const businessManagers = async (
-  businessManagerId: string
+  businessManagerCode: string
 ): Promise<IBusinessManagers> => {
   const maxRetries = maxRetriesServices;
   const fetchTimeout = fetchTimeoutServices;
@@ -14,17 +14,21 @@ const businessManagers = async (
          const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), fetchTimeout);
 
+  const queryParams = new URLSearchParams({
+    publicCode: businessManagerCode,
+  });
+
       const options: RequestInit = {
         method: "GET",
         headers: {
-          "X-Action": "SearchByIdBusinessManager",
+          "X-Action": "SearchAllBusinessManager",
           "Content-type": "application/json; charset=UTF-8",
         },
         signal: controller.signal,
       };
 
       const res = await fetch(
-        `${enviroment.IVITE_ISAAS_QUERY_PROCESS_SERVICE}/business-managers/${businessManagerId}`,
+        `${enviroment.IVITE_ISAAS_QUERY_PROCESS_SERVICE}/business-managers?${queryParams}`,
         options
       );
 
@@ -44,7 +48,7 @@ const businessManagers = async (
         };
       }
 
-      return mapBusinessManagerApiToEntity(data);
+      return mapBusinessManagerApiToEntity(data[0]);
     } catch (error) {
       if (attempt === maxRetries) {
         throw new Error(

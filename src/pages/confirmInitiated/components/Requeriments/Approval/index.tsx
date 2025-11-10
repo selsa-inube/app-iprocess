@@ -15,7 +15,7 @@ import { requirementsNotMet } from "../config/tablesRequirements.config";
 interface ApprovalProps {
   dataListOfRequirements: IListOfRequirementsByPackage;
   packageId: string;
-  setLoadDataTable:(show:boolean) => void;
+  setLoadDataTable: (show: boolean) => void;
 }
 
 const Approval = (props: ApprovalProps) => {
@@ -24,8 +24,10 @@ const Approval = (props: ApprovalProps) => {
   const [showProgressModal, setShowProgressModal] = useState(false);
   const [responseApproval, setResponseApproval] = useState<IApprovalResponse>();
   const [fieldsEntered, setFieldsEntered] = useState<IApprovalEntry>();
-const {appData} = useContext(AppContext);
+  const { appData } = useContext(AppContext);
   const { addFlag } = useFlag();
+
+  const [toggle, setToggle] = useState(false);
 
   const handleApproval = async () => {
     const justification = `Actualizado por el usuario ${appData.user.userName} del gestor de procesos INUBE - ${fieldsEntered?.observation}`;
@@ -33,14 +35,19 @@ const {appData} = useContext(AppContext);
     const dataApproval = {
       packageId: packageId,
       modifyJustification: justification,
-      requirementModifyDate: formatDateEndpoint(new Date(dataListOfRequirements.requirementDate)),
+      requirementModifyDate: formatDateEndpoint(
+        new Date(dataListOfRequirements.requirementDate)
+      ),
       requirementPackageId: dataListOfRequirements.requirementPackageId,
     };
     try {
       setShowModal(!showModal);
       setShowProgressModal(true);
-      const newApproval = await approvalRequirement(appData.businessUnit.publicCode, dataApproval);
-      setResponseApproval(newApproval);  
+      const newApproval = await approvalRequirement(
+        appData.businessUnit.publicCode,
+        dataApproval
+      );
+      setResponseApproval(newApproval);
     } catch (error) {
       setShowProgressModal(false);
       addFlag({
@@ -67,14 +74,22 @@ const {appData} = useContext(AppContext);
     setShowModal(!showModal);
   };
 
-  const isApprovalRequirement = !requirementsNotMet.includes(
-    dataListOfRequirements.requirementStatus
-  );
+  useEffect(() => {
+    const isApprovalRequirement = !requirementsNotMet.includes(
+      dataListOfRequirements.requirementStatus
+    );
+
+    setToggle(isApprovalRequirement);
+  }, []);
+
+  const handleToggle = () => {
+    setToggle(!toggle);
+  };
 
   return (
     <>
       <Icon
-        appearance="dark"
+        appearance={ComponentAppearance.DARK}
         icon={<MdOutlineCheckCircle />}
         size="16px"
         onClick={handleToggleModal}
@@ -84,10 +99,11 @@ const {appData} = useContext(AppContext);
       {showModal && (
         <ApprovalModal
           portalId="portal"
-          approvalChecked={isApprovalRequirement}
+          approvalChecked={toggle}
           onCloseModal={handleToggleModal}
           onConfirm={handleApproval}
           setFieldEntered={setFieldsEntered}
+          handleToggle={handleToggle}
         />
       )}
       {showProgressModal && (

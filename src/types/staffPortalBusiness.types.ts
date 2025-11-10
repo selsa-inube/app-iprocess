@@ -6,10 +6,10 @@ interface IoptionsByStaffPortalBusinessManager {
 
 interface IStaffPortalByBusinessManager {
   abbreviatedName: string;
-  businessManagerId: string;
+  businessManagerCode: string;
   descriptionUse: string;
   publicCode: string;
-  staffPortalCatalogId: string;
+  staffPortalCatalogCode: string;
   staffPortalId: string;
   url: string;
   optionsByStaffPortalBusinessManager?: IoptionsByStaffPortalBusinessManager[];

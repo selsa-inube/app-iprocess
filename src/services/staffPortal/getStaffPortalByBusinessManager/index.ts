@@ -1,14 +1,20 @@
-import { enviroment, fetchTimeoutServices, maxRetriesServices } from "@config/environment";
+import {
+  enviroment,
+  fetchTimeoutServices,
+  maxRetriesServices,
+} from "@config/environment";
 import { IStaffPortalByBusinessManager } from "@ptypes/staffPortalBusiness.types";
 import { mapStaffPortalByBusinessManagerApiToEntities } from "./mappers";
 
-const staffPortalByBusinessManager = async (portalCode: string): Promise<IStaffPortalByBusinessManager[]> => {
+const staffPortalByBusinessManager = async (
+  portalCode: string
+): Promise<IStaffPortalByBusinessManager[]> => {
   const maxRetries = maxRetriesServices;
   const fetchTimeout = fetchTimeoutServices;
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
-         const controller = new AbortController();
+      const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), fetchTimeout);
 
       const options: RequestInit = {
@@ -21,8 +27,8 @@ const staffPortalByBusinessManager = async (portalCode: string): Promise<IStaffP
       };
 
       const queryParams = new URLSearchParams({
-    staffPortalId: portalCode,
-  });
+        staffPortalId: portalCode,
+      });
 
       const res = await fetch(
         `${enviroment.IVITE_ISAAS_QUERY_PROCESS_SERVICE}/staff-portals-by-business-manager?${queryParams.toString()}`,
@@ -36,7 +42,7 @@ const staffPortalByBusinessManager = async (portalCode: string): Promise<IStaffP
       }
 
       const data = await res.json();
-      
+
       if (!res.ok) {
         throw {
           message: "Error al obtener los datos del portal",

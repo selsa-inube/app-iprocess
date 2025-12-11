@@ -10,8 +10,6 @@ const useBusinessManagers = (
   const [hasError, setHasError] = useState(false);
   const [errorCode, setErrorCode] = useState<number>(0);
 
-     console.log({portalPublicCode});
-
   useEffect(() => {
     const fetchBusinessManagers = async () => {
       if (!portalPublicCode) {

@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
 import { Meta, StoryFn } from "@storybook/react";
 import { Button } from "@inubekit/inubekit";
-
-
 import { tokens } from "@design/tokens";
-import { theme } from "@config/theme";
 import { appearances } from "../types";
 import { ProgressCardWithBarDetermined, ProgressCardWithBarDeterminedProps } from "..";
 
@@ -150,14 +146,12 @@ const TemplateThemed: StoryFn<ProgressCardWithBarDeterminedProps> = (args) => {
     <>
       <Button onClick={() => setShowModal(true)}>Show Modal</Button>
       {showModal && (
-        <ThemeProvider theme={theme}>
         <DynamicProgressCardWithBarDetermined>
           <ProgressCardWithBarDetermined
             {...args}
             onCancel={() => setShowModal(false)}
           />
         </DynamicProgressCardWithBarDetermined>
-        </ThemeProvider>
       )}
     </>
   );

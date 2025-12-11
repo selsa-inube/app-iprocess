@@ -1,14 +1,13 @@
+import { useIAuth } from "@inube/iauth-react";
 import { useEffect, useMemo, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 import { decrypt } from "@utils/encrypt";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
 import { IAppData } from "@context/AppContext/types";
-import { validateAndTrimString } from "@utils/validateAndTrimString";
 import { useBusinessManagers } from "../useBusinessManagers";
 import { usePortalData } from "../usePortalData";
 
 const useValidatingLoginInformation = () => {
-  const { user } = useAuth0();
+const { user, isLoading: isIAuthLoading } = useIAuth();
 
   const portalCode = decrypt(localStorage.getItem("portalCode") ?? "");
   const { portalData } = usePortalData(portalCode);
@@ -53,10 +52,26 @@ const useValidatingLoginInformation = () => {
       urlLogo: businessUnitData?.urlLogo ?? "",
     },
     user: {
-      userAccount: validateAndTrimString(user?.email ?? "") ?? "",
-      userName: user?.name ?? "",
+userAccount: user.id || "",
+      userName: user.nickname || "",
+      identificationDocumentNumber: user.id || "",
     },
   });
+    useEffect(() => {
+    if (!isIAuthLoading) {
+      if (user) {
+        setAppData((prev) => ({
+          ...prev,
+          user: {
+            ...prev.user,
+            userAccount: user.id || "",
+            userName: user.nickname || "",
+            identificationDocumentNumber: user.id || "",
+          },
+        }));
+      }
+    }
+  }, [user, isIAuthLoading]);
 
   useEffect(() => {
     if (!businessManagersData) return;
@@ -79,6 +94,26 @@ const useValidatingLoginInformation = () => {
       },
     }));
   }, [businessManagersData, portalData, portalCode]);
+  useEffect(() => {
+    if (!businessManagersData) return;
+
+    if (
+      businessManagersData.publicCode &&
+      businessManagersData.publicCode.length > 0
+    ) {
+      setAppData((prev) => ({
+        ...prev,
+        businessManager: {
+          ...prev.businessManager,
+          publicCode: businessManagersData.publicCode,
+          abbreviatedName: businessManagersData.abbreviatedName,
+          urlBrand: businessManagersData.urlBrand,
+          urlLogo: businessManagersData.urlLogo,
+        },
+      }));
+    }
+  }, [businessManagersData]);
+
 
   useEffect(() => {
     localStorage.setItem("businessUnitSigla", businessUnitSigla);

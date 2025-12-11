@@ -1,8 +1,7 @@
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider, useTheme } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryFn } from "@storybook/react";
 
-import { theme } from "@config/theme";
 import {
   dataConfirmInitiated,
   dataFinished,
@@ -27,7 +26,7 @@ const meta: Meta<typeof CardProcess> = {
 
 const Template: StoryFn<CardProcessProps> = (args) => {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={useTheme}>
       <CardProcess {...args} />
     </ThemeProvider>
   );

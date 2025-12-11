@@ -70,7 +70,7 @@ const RequirementsUI = (props: RequirementsUIProps) => {
                     (normalizeStatusRequirement?.appearance as appearances) ||
                     "light"
                   }
-                  weight="strong"
+                  displayIcon={false}
                 />
               </Stack>
               {withTooltip && validateStatus && (

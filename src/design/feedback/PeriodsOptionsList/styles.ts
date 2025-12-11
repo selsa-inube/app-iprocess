@@ -16,7 +16,7 @@ const StyledContainer = styled.ul<IStyledContainer>`
   border-radius: ${tokens.spacing.s050};
 
   background: ${({ theme }) => {
-    return theme?.optionsPeriod?.optionList?.background?.expanded;
+    return theme?.optionsPeriod?.optionList?.background?.selected;
   }};
   box-shadow:
     0px 1px 2px rgba(0, 0, 0, 0.3),

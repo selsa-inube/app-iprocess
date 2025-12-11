@@ -2,10 +2,11 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { MdOutlineChevronRight, MdOutlineDoorFront } from "react-icons/md";
 import { useMediaQuery, Text, Icon, Header } from "@inubekit/inubekit";
 
-import { AppCard } from "@components/feedback/AppCard";
-import { navConfig, userMenu } from "@config/nav";
-import { Title } from "@design/data/Title";
 import { AppContext } from "@context/AppContext";
+import { useOptionsByBusinessUnit } from "@hooks/useOptionsByBusinessunits";
+import { AppCard } from "@components/feedback/AppCard";
+import { userMenu } from "@config/nav";
+import { Title } from "@design/data/Title";
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
 import { ICardData } from "./types";
@@ -15,12 +16,15 @@ import {
   StyledContainer,
   StyledContainerCards,
   StyledContainerSection,
-  StyledContentImg,
   StyledFooter,
   StyledHeaderContainer,
   StyledLogo,
   StyledTitle,
 } from "./styles";
+import { RenderLogo } from "@components/feedback/renderLogo";
+import { mainNavigation } from "@config/mainNavigation";
+import { useLocation } from "react-router-dom";
+import { decrypt } from "@utils/encrypt";
 
 interface HomeProps {
   selectedClient: string;
@@ -29,26 +33,23 @@ interface HomeProps {
   isLoading?: boolean;
 }
 
-const renderLogo = (imgUrl: string) => {
-  return (
-    <StyledContentImg to="/">
-      <StyledLogo src={imgUrl} />
-    </StyledContentImg>
-  );
-};
-
 function HomeUI(props: HomeProps) {
   const { data, isLoading, selectedClient, setSelectedClient } = props;
-
-  const { appData, businessUnitsToTheStaff, setBusinessUnitSigla } =
+  const portalId = localStorage.getItem("portalCode");
+  const staffPortalId = portalId ? decrypt(portalId) : "";
+  const { appData, businessUnitsToTheStaff, businessUnitSigla, setBusinessUnitSigla } =
     useContext(AppContext);
   const [collapse, setCollapse] = useState(false);
  
-
   const collapseMenuRef = useRef<HTMLDivElement>(null);
   const businessUnitChangeRef = useRef<HTMLDivElement>(null);
   const isTablet = useMediaQuery("(max-width: 944px)");
   const username = appData.user.userName.split(" ")[0];
+
+    const { optionsCards } = useOptionsByBusinessUnit({
+    staffPortalId,
+    businessUnit: businessUnitSigla,
+  });
  
   useEffect(() => {
     if (appData.businessUnit.publicCode) {
@@ -62,19 +63,22 @@ function HomeUI(props: HomeProps) {
     setSelectedClient(businessUnit.abbreviatedName);
     setCollapse(false);
   };
+
+    const location = useLocation();
+
+  const { optionsHeader } = mainNavigation(optionsCards, location);
  
   return (
     <>
       <StyledContainer>
         <StyledHeaderContainer>
             <Header
-              portalId="portal"
-              navigation={navConfig(data || [])}
-              user={{
-                username: appData.user.userName,
-                breakpoint: "848px",
-              }}
-              logoURL={renderLogo(appData.businessUnit.urlLogo)}
+              navigation={optionsHeader}
+                  user={{
+                    username: appData.user.userName,
+                    breakpoint: "1281px",
+                  }}
+                  logoURL={RenderLogo({ imgUrl: appData.businessUnit.urlLogo })}
               menu={userMenu}
             />
 
@@ -117,8 +121,13 @@ function HomeUI(props: HomeProps) {
           <StyledContainerCards>
             {isLoading ? (
               <>
-                <AppCard isLoading={isLoading} />
-                <AppCard isLoading={isLoading} />
+                <AppCard
+                  label={""}
+                  description={""}
+                  icon={""}
+                  url={""}
+                  loading
+                />
               </>
             ) : (
               <>
@@ -130,7 +139,7 @@ function HomeUI(props: HomeProps) {
                       description={card.description}
                       icon={card.icon}
                       url={card.url}
-                      isLoading={isLoading}
+                      loading={false}
                     />
                   ))
                 ) : (

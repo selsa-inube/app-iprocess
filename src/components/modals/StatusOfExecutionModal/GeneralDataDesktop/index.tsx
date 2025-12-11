@@ -64,7 +64,7 @@ const GeneralDataDesktop = (props: GeneralDataDesktopProps) => {
               >
                 {field.titleName}
               </Label>
-              <Fieldset legend="" spacing="compact" type="title" size="medium">
+              <Fieldset legend="" spacing="compact">
                 <Text type="body" size="medium">
                   {value}
                 </Text>

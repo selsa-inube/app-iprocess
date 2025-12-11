@@ -40,7 +40,8 @@ interface IOptionsByBusinessUnits {
   descriptionUse: string;
   optionStaffId: string;
   publicCode: string;
-  useCaseId: string;
+  iconReference: string;
+  useCaseName?: string;
 }
 
 export type {

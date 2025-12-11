@@ -97,8 +97,6 @@ const DetailModal = (props: DetailModalProps) => {
                         <Fieldset
                           legend=""
                           spacing="compact"
-                          type="title"
-                          size="large"
                         >
                           <Text type="body" size="medium">
                             {data[field.id]}
@@ -128,7 +126,7 @@ const DetailModal = (props: DetailModalProps) => {
                             normalizeStatusRequirementByName(data[field.id])
                               ?.name || ""
                           }
-                          weight="strong"
+                          displayIcon={false}
                         />
                       </Stack>
                     )

@@ -74,7 +74,7 @@ const OnDemandRequirementsUI = (props: OnDemandRequirementsUIProps) => {
                     (normalizeStatusRequirement?.appearance as appearances) ||
                     "gray"
                   }
-                  weight="strong"
+                 displayIcon={false}
                 />
               </Stack>
               {validateStatus && (

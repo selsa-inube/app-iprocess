@@ -1,49 +1,90 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext, useMemo } from "react";
 
-import { IOptionsByBusinessUnits } from "@ptypes/staffPortalBusiness.types";
+import { AppContext } from "@context/AppContext";
 import { optionsByBusinessUnits } from "@services/staffPortal/getOptionsByBusinessUnits";
-import { normalizeOptionsByPublicCode } from "@utils/optionsByBusinessUnits";
+import { IOptionsByBusinessUnits } from "@ptypes/staffPortal/IOptionsByBusinessUnits";
+import { getIcon } from "@utils/getIcon";
+import { normalizeOptionsByPublicCode } from "@utils/optionByBusinessunit";
+import { IUseOptionsByBusinessUnit } from "@ptypes/staffPortal/IUseOptionsByBusinessUnit";
 
-export const useOptionsByBusinessunits = (
-  staffPortalId: string,
-  businessUnitSigla: string
-) => {
-  const [optionsData, setOptionsData] = useState<IOptionsByBusinessUnits[]>([]);
+const useOptionsByBusinessUnit = (props: IUseOptionsByBusinessUnit) => {
+  const { businessUnit, staffPortalId, optionName } = props;
+
+  const { appData } = useContext(AppContext);
+  const [optionsBusinessUnit, setOptionsBusinessUnit] = useState<
+    IOptionsByBusinessUnits[]
+  >([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    const fetchOptionsByBusinessUnits = async () => {
+    const fetchOptionBusinessUnitData = async () => {
+      const businessUnitSigla = JSON.parse(businessUnit ?? "{}");
+
+      if (!businessUnitSigla.publicCode || staffPortalId.length === 0) {
+        setOptionsBusinessUnit([]);
+        setHasError(false);
+        setLoading(false);
+        return;
+      }
+
       setLoading(true);
+      setHasError(false);
+
       try {
-        const businessUnit = JSON.parse(businessUnitSigla || "{}");
-        const newOptions = await optionsByBusinessUnits(
+        const data = await optionsByBusinessUnits(
+          businessUnitSigla.publicCode,
           staffPortalId,
-          businessUnit.publicCode
+          appData.user.userAccount,
         );
-        setOptionsData(newOptions);
+        setOptionsBusinessUnit(data);
       } catch (error) {
         console.info(error);
         setHasError(true);
+        setOptionsBusinessUnit([]);
       } finally {
         setLoading(false);
       }
     };
-    fetchOptionsByBusinessUnits();
-  }, [businessUnitSigla]);
 
-  const optionsCards = optionsData
-    .filter((option) => normalizeOptionsByPublicCode(option.publicCode))
-    .map((option) => {
-      const normalizedOption = normalizeOptionsByPublicCode(option.publicCode);
-      return {
-        id: option.publicCode,
-        label: option.abbreviatedName,
-        description: option.descriptionUse,
-        icon: normalizedOption?.icon || "",
-        url: normalizedOption?.url || "",
-      };
-    });
+    fetchOptionBusinessUnitData();
+  }, [businessUnit, staffPortalId, appData.user.userAccount]);
 
-  return { optionsCards, hasError, loading };
+  const optionsCards = useMemo(() => {
+    if (hasError) {
+      return [];
+    }
+
+    const cards = optionsBusinessUnit
+      .filter((option) => normalizeOptionsByPublicCode(option.publicCode))
+      .map((option) => {
+        const normalizedOption = normalizeOptionsByPublicCode(
+          option.publicCode,
+        );
+        return {
+          id: option.publicCode,
+          publicCode: option.abbreviatedName,
+          description: option.descriptionUse,
+          icon: getIcon(option.iconReference, 22, false) ?? "",
+          url: normalizedOption?.url ?? "",
+        };
+      });
+    return cards;
+  }, [hasError, optionsBusinessUnit]);
+
+  const descriptionOptions = useMemo(() => {
+    return optionName
+      ? optionsCards.find((option) => option.publicCode === optionName)
+      : undefined;
+  }, [optionName, optionsCards]);
+
+  return {
+    optionsCards,
+    optionsBusinessUnit,
+    descriptionOptions,
+    loading,
+    hasError,
+  };
 };
+
+export { useOptionsByBusinessUnit };

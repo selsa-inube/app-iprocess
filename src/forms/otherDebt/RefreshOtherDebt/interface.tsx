@@ -60,7 +60,7 @@ const RefreshOtherDebtUI = (props: RefreshOtherDebtUIProps) => {
               <Text type="label" size="large" weight="bold">
                 Descripción sugerida
               </Text>
-              <Fieldset legend="" spacing="compact" type="title" size="medium">
+              <Fieldset legend="" spacing="compact">
                 <Text>{String(data?.descriptionSuggested)}</Text>
               </Fieldset>
             </StyledField>

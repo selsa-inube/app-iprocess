@@ -47,16 +47,13 @@ const StyledTextErrorContainer = styled.div<IStyledTextErrorContainer>`
   gap: ${tokens.spacing.s300};
   padding: ${tokens.spacing.s250};
   border-radius: ${tokens.spacing.s100};
-  border: 2px solid
-    ${({ theme }) =>
-      theme.color?.stroke?.gray?.regular ?? inube.palette.neutral.N40};
+  border: 2px solid ${inube.palette.neutral.N40};
 `;
 
 const StyledList = styled.ul``;
 
 const StyledItem = styled.li`
-  color: ${({ theme }) =>
-    theme.color?.text?.gray?.regular ?? inube.palette.neutral.N90};
+  color: ${inube.palette.neutral.N90};
 `;
 
 const StyledDividerContainer = styled.div<IStyledDividerContainer>`

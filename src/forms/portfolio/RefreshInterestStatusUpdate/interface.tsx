@@ -57,7 +57,7 @@ const RefreshInterestStatusUpdateUI = (
               <Text type="label" size="large" weight="bold">
                 Descripción sugerida
               </Text>
-              <Fieldset legend="" spacing="compact" type="title" size="medium">
+              <Fieldset legend="" spacing="compact">
                 <Text>{String(data?.descriptionSuggested)}</Text>
               </Fieldset>
             </StyledField>
@@ -79,7 +79,7 @@ const RefreshInterestStatusUpdateUI = (
               <Text type="label" size="large" weight="bold">
                 Fecha y hora de ejecución
               </Text>
-              <Fieldset legend="" spacing="compact" type="title" size="medium">
+              <Fieldset legend="" spacing="compact">
                 <Text>{formatDate(new Date(data.date as string), true)}</Text>
               </Fieldset>
             </StyledField>

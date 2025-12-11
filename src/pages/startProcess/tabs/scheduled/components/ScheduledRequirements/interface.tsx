@@ -105,7 +105,7 @@ const ScheduledRequirementsUI = (props: ScheduledRequirementsUIProps) => {
                           (normalizeStatusRequirement?.appearance as appearances) ||
                           "light"
                         }
-                        weight="strong"
+                        displayIcon={false}
                       />
                     </Stack>
 

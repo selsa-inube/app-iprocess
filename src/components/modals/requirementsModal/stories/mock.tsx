@@ -2,6 +2,7 @@ import { MdAddCircleOutline, MdOutlineCheckCircle } from "react-icons/md";
 import { Icon,Tag } from "@inubekit/inubekit";
 
 import { IAction } from "@components/data/Table/props";
+import { ComponentAppearance } from "@ptypes/aparences.types";
 import { IEntries, ITitlesRequirements } from "../types";
 
 const titlesMock: ITitlesRequirements[][] = [
@@ -48,24 +49,24 @@ const entriesMock: IEntries[][] = [
     {
       id: "01",
       systemsValidationOne: "Que el asociado sea activo",
-      tag: <Tag label="Cumple" appearance="success" />,
+      tag: <Tag label="Cumple" appearance={ComponentAppearance.SUCCESS} />,
     },
     {
       id: "02",
       systemsValidationOne: "Que este al día en las obligaciones",
-      tag: <Tag label="Cumple" appearance="success" />,
+      tag: <Tag label="Cumple" appearance={ComponentAppearance.SUCCESS} />,
     },
     {
       id: "03",
       systemsValidationOne: "Que tenga más de 30 años",
-      tag: <Tag label="No Cumple" appearance="danger" />,
+      tag: <Tag label="No Cumple" appearance={ComponentAppearance.DANGER} />,
     },
   ],
   [
     {
       id: "04",
       systemsValidationTwo: "Imagenes de la cédula de ciudadanía",
-      tag: <Tag label="Cumple" appearance="success" />,
+      tag: <Tag label="Cumple" appearance={ComponentAppearance.SUCCESS} />,
     },
     {
       id: "05",
@@ -82,12 +83,12 @@ const entriesMock: IEntries[][] = [
     {
       id: "07",
       systemsValidationThree: "Referencias laborales",
-      tag: <Tag label="Cumple" appearance="success" />,
+      tag: <Tag label="Cumple" appearance={ComponentAppearance.SUCCESS} />,
     },
     {
       id: "08",
       systemsValidationThree: "Proponer un codeudor",
-      tag: <Tag label="No Cumple" appearance="danger" />,
+      tag: <Tag label="No Cumple" appearance={ComponentAppearance.DANGER} />,
     },
   ],
 ];

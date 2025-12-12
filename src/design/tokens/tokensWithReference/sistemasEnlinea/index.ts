@@ -1,5 +1,186 @@
 import { inube } from "@inubekit/inubekit";
 const sistemasenlinea = {
+  color: {
+    text: {
+      primary: {
+        regular: "B400",
+        hover: "B300",
+        disabled: "N70",
+      },
+      error: {
+        regular: "R400",
+        hover: "R300",
+        disabled: "N70",
+      },
+      warning: {
+        regular: "Y400",
+        hover: "Y300",
+        disabled: "N70",
+      },
+      success: {
+        regular: "G400",
+        hover: "G300",
+        disabled: "N70",
+      },
+      help: {
+        regular: "P400",
+        hover: "P300",
+        disabled: "N70",
+      },
+      information: {
+        regular: "B400",
+        hover: "B300",
+        disabled: "N70",
+      },
+      dark: {
+        regular: "N900",
+        hover: "N500",
+        disabled: "N70",
+      },
+      gray: {
+        regular: "N300",
+        hover: "N100",
+        disabled: "N70",
+      },
+      light: {
+        regular: "N10",
+        hover: "N0",
+        disabled: "N70",
+      },
+      link: {
+        regular: "B400",
+        hover: "B300",
+        disabled: "N70",
+      },
+    },
+    surface: {
+      primary: {
+        regular: "B400",
+        hover: "B300",
+        clear: "B50",
+        disabled: "N20",
+      },
+      error: {
+        regular: "R400",
+        hover: "R300",
+        clear: "R50",
+        disabled: "N20",
+      },
+      warning: {
+        regular: "Y400",
+        hover: "Y300",
+        clear: "Y50",
+        disabled: "N20",
+      },
+      success: {
+        regular: "G400",
+        hover: "G300",
+        clear: "G50",
+        disabled: "N20",
+      },
+      information: {
+        regular: "B400",
+        hover: "B300",
+        clear: "B50",
+        disabled: "N20",
+      },
+      help: {
+        regular: "P400",
+        hover: "P300",
+        clear: "P50",
+        disabled: "N20",
+      },
+      nav: {
+        regular: "N10",
+      },
+      navLink: {
+        regular: "N0A",
+        selected: "N30",
+        hover: "N30",
+      },
+      blanket: {
+        regular: "N100A",
+      },
+      dark: {
+        regular: "N900",
+        hover: "N500",
+        clear: "N30",
+        disabled: "N20",
+      },
+      gray: {
+        regular: "N30",
+        hover: "N20",
+        clear: "N10",
+        disabled: "N20",
+      },
+      light: {
+        regular: "N10",
+        hover: "N0",
+        clear: "N0",
+        disabled: "N20",
+      },
+    },
+    stroke: {
+      primary: {
+        regular: "B400",
+        hover: "B300",
+        focus: "B300",
+        disabled: "N70,",
+      },
+      error: {
+        regular: "R400",
+        hover: "R300",
+        disabled: "N70,",
+      },
+      warning: {
+        regular: "Y400",
+        hover: "Y300",
+        disabled: "N70,",
+      },
+      success: {
+        regular: "G400",
+        hover: "G300",
+        disabled: "N70,",
+      },
+      information: {
+        regular: "B400",
+        hover: "B300",
+        disabled: "N70,",
+      },
+      help: {
+        regular: "P400",
+        hover: "P300",
+        disabled: "N70,",
+      },
+      divider: {
+        regular: "N40,",
+      },
+      spinner: {
+        regular: "N30",
+        transparent: "N0A",
+      },
+      dark: {
+        regular: "N900",
+        hover: "N500",
+        disabled: "N70,",
+      },
+      gray: {
+        regular: "N200",
+        hover: "N90",
+        disabled: "N70",
+      },
+      light: {
+        regular: "N10",
+        hover: "N0",
+        disabled: "N70",
+      },
+      link: {
+        regular: "B400",
+        hover: "B300",
+        disabled: "N70,",
+      },
+    },
+  },
   icon: {
     primary: {
       content: {

@@ -14,7 +14,7 @@ export const StyledContainer = styled.div`
   max-height: 385px;
   border: 1px solid
     ${({ theme }) =>
-      theme.palette.neutral.N200 || inube.palette.neutral.N40};
+      theme.color?.stroke?.gray?.regular || inube.palette.neutral.N40};
 `;
 
 export const StyledHead = styled.div`

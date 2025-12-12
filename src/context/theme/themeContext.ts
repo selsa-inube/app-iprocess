@@ -1,12 +1,7 @@
-import { createContext, Dispatch, SetStateAction, useContext } from "react";
-import { tokensWithReference } from "@design/tokens/tokensWithReference";
+import { createContext, useContext } from "react";
+import { IThemeContextType } from "@ptypes/IThemeContextType";
 
-type ThemeName = keyof typeof tokensWithReference;
 
-interface IThemeContextType {
-  themeName: ThemeName;
-  setThemeName: Dispatch<SetStateAction<ThemeName>>;
-}
 
 const ThemeContext = createContext<IThemeContextType>({
   themeName: "sistemasenlinea",
@@ -16,4 +11,4 @@ const ThemeContext = createContext<IThemeContextType>({
 const useTheme = () => useContext(ThemeContext);
 
 export { ThemeContext, useTheme };
-export type { ThemeName, IThemeContextType };
+

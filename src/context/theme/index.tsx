@@ -1,14 +1,12 @@
-import { useState, useEffect, ReactNode } from "react";
+import { useState, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { inube } from "@inubekit/inubekit";
 import { tokensWithReference } from "@design/tokens/tokensWithReference";
 
+import { IThemeProviderWrapper } from "@ptypes/IThemeProviderWrapper";
 import { ITheme } from "@ptypes/context/ITheme";
-import { ThemeContext, ThemeName } from "./themeContext";
-
-interface IThemeProviderWrapper {
-  children: ReactNode;
-}
+import { ThemeContext} from "./themeContext";
+import { ThemeName } from "@src/types/IThemeContextType";
 
 const ThemeProviderWrapper = ({ children }: IThemeProviderWrapper) => {
   const savedTheme =

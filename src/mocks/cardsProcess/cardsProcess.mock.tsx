@@ -11,6 +11,7 @@ import { Stack, Icon,Tag } from "@inubekit/inubekit";
 import { IProcess } from "@components/feedback/CardProcess/types";
 import { Tooltip } from "@design/feedback/Tooltip";
 import { tokens } from "@design/tokens";
+import { ComponentAppearance } from "@src/types/aparences.types";
 
 const actionsStartprocess = [
   {
@@ -122,7 +123,7 @@ export const dataStartprocess = {
   description:
     "Not specified for the event confirmationpaymentinexternalaccount / StartPaymentWorkflow",
   periodicity: "Diario",
-  status: <Tag label="Cumple" appearance="success" />,
+  status: <Tag label="Cumple" appearance={ComponentAppearance.SUCCESS} />,
   actions: actionsStartprocess,
 };
 
@@ -132,7 +133,7 @@ export const dataStartProcessWithNoDefined = {
   description:
     "Not specified for the event confirmationpaymentinexternalaccount / StartPaymentWorkflow",
   periodicity: "Diario",
-  status: <Tag label="No Definido" appearance="gray" />,
+  status: <Tag label="No Definido" appearance={ComponentAppearance.GRAY} />,
   actions: actionsStartprocess,
 };
 

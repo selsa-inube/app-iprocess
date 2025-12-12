@@ -32,7 +32,7 @@ const AppCard = (props: IAppCard) => {
         <Text type="title" size="medium" weight="bold">
           {label}
         </Text>
-        <Icon icon={icon} appearance="dark" size="22px" cursorHover />
+        <Icon icon={icon} appearance={ComponentAppearance.DARK} size="22px" cursorHover />
       </Stack>
       <Divider dashed />
       <Text size="small" appearance={ComponentAppearance.GRAY}>

@@ -32,7 +32,7 @@ const StyledModal = styled.div<IStyledModal>`
 const StyledContainerProgressBar = styled.div<IStyledContainerProgressBar>`
   width: 100%;
   background-color: ${({ theme, $appearance }) => {
-    return theme?.progressBar?.[$appearance]?.track.color;
+    return theme?.progressBar?.[$appearance].track.color;
   }};
   border: 1px solid ${inube.palette.neutral.N40};
   border-radius: ${tokens.spacing.s050};

@@ -11,6 +11,7 @@ import { Stack, Icon,Tag } from "@inubekit/inubekit";
 import { IProcess } from "@components/feedback/CardProcess/types";
 import { Tooltip } from "@design/feedback/Tooltip";
 import { tokens } from "@design/tokens";
+import { ComponentAppearance } from "@src/types/aparences.types";
 
 const actionsStartprocess = [
   {
@@ -122,7 +123,7 @@ export const dataStartprocess = {
   description:
     "Not specified for the event confirmationpaymentinexternalaccount / StartPaymentWorkflow",
   periodicity: "Diario",
-  status: <Tag label="Cumple" appearance="success" weight="strong" />,
+  status: <Tag label="Cumple" appearance={ComponentAppearance.SUCCESS} />,
   actions: actionsStartprocess,
 };
 
@@ -132,7 +133,7 @@ export const dataStartProcessWithNoDefined = {
   description:
     "Not specified for the event confirmationpaymentinexternalaccount / StartPaymentWorkflow",
   periodicity: "Diario",
-  status: <Tag label="No Definido" appearance="gray" weight="strong" />,
+  status: <Tag label="No Definido" appearance={ComponentAppearance.GRAY} />,
   actions: actionsStartprocess,
 };
 
@@ -146,7 +147,7 @@ export const dataStartprocessWithInfo = {
   status: (
     <Stack gap={tokens.spacing.s050}>
       <Stack height="80%">
-        <Tag label="Sin Evaluar" appearance="warning" weight="strong" />
+        <Tag label="Sin Evaluar" appearance="warning" />
       </Stack>
       <Tooltip
         description="Puede hacer clic en el botón para prevalidar los requisitos"
@@ -168,7 +169,7 @@ export const dataConfirmInitiated = {
   status: (
     <Stack gap={tokens.spacing.s050}>
       <Stack height="80%">
-        <Tag label="No Cumple" appearance="danger" weight="strong" />
+        <Tag label="No Cumple" appearance="danger" />
       </Stack>
       <Tooltip
         description="Puede hacer clic en el botón para prevalidar los requisitos"
@@ -188,7 +189,7 @@ export const dataValidateProcess = {
   description:
     "Not specified for the event confirmationpaymentinexternalaccount / StartPaymentWorkflow",
   date: "31/DIC/2024",
-  status: <Tag label="Cumple" appearance="success" weight="strong" />,
+  status: <Tag label="Cumple" appearance="success" />,
   actions: actionsValidateProcess,
   totalPersonsProsecuted: 1100,
   totalPersonsCoversProcess: 1200,
@@ -200,7 +201,7 @@ export const dataFinished = {
   description:
     "Not specified for the event confirmationpaymentinexternalaccount / StartPaymentWorkflow",
   date: "31/DIC/2024",
-  status: <Tag label="No Cumple" appearance="danger" weight="strong" />,
+  status: <Tag label="No Cumple" appearance="danger" />,
   actions: actionsFinished,
   totalPersonsProsecuted: 1100,
   totalPersonsCoversProcess: 1200,

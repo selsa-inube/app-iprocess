@@ -1,36 +1,22 @@
-import { MdOutlineCheck, MdOutlineMoving, MdOutlineStart, MdOutlineThumbUp } from "react-icons/md";
 import { ICardData } from "@pages/home/types";
 
-
 const appCards: ICardData[] = [
-  {
-    id: "startProcess",
-    label: "Iniciar procesos",
-    description: "Inicializa los procesos.",
-    icon: <MdOutlineStart />,
-    url: "/start-process",
+ {
+    publicCode: "Líneas de Crédito",
+    url: "/credit-lines",
   },
   {
-    id: "confirmInitiated",
-    label: "Confirmar iniciados",
-    description: "Confirma los proceso iniciados.",
-    icon: <MdOutlineThumbUp />,
-    url: "/confirm-initiated",
+    publicCode: "Destinos de dinero",
+    url: "/money-destination",
   },
   {
-    id: "validateProgress",
-    label: "Validar progreso",
-    description: "Valida el progreso de los procesos.",
-    icon: <MdOutlineMoving />,
-    url: "/validate-progress",
+    publicCode: "Nóminas de convenio",
+    url: "/payroll-agreement",
   },
   {
-    id: "finished",
-    label: "Finalizados",
-    description: "Visualiza los procesos que estan finalizados.",
-    icon: <MdOutlineCheck />,
-    url: "/finished",
-  },  
+    publicCode: "Politicas generales de credito",
+    url: "/general-credit-policies",
+  },
 
 ];
 

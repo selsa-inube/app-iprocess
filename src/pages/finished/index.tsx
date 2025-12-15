@@ -1,5 +1,8 @@
 import { useContext, useEffect, useState } from "react";
+import { AppContext } from "@context/AppContext";
 
+import { listPeriodsToProcessInitiated } from "@services/validateProgress/getPeriodsToProcessInitiated";
+import { finishedData } from "@services/finished";
 import {
   currentMonthLetters,
   currentYear,
@@ -7,8 +10,6 @@ import {
   filterDateForMonthAndYear,
   formatMonthEndpoint,
 } from "@utils/dates";
-import { listPeriodsToProcessInitiated } from "@services/validateProgress/getPeriodsToProcessInitiated";
-import { finishedData } from "@services/finished";
 import { FinishedUI } from "./interface";
 import {
   IChangePeriodEntry,
@@ -16,7 +17,6 @@ import {
   StartProcesses,
 } from "../startProcess/types";
 import { IFilterDateForMonthAndYear } from "../validateProgress/types";
-import { AppContext } from "@src/context/AppContext";
 
 function Finished() {
   const { appData } = useContext(AppContext);

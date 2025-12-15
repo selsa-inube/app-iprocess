@@ -9,7 +9,8 @@ import { mapOptionsByBusinessUnitsToEntities } from "./mappers";
 
 const optionsByBusinessUnits = async (
  staffPortalId: string,
- businessUnitPublicCode: string
+ businessUnitPublicCode: string,
+  userAccount: string,
 ): Promise<IOptionsByBusinessUnits[]> => {
   const maxRetries = maxRetriesServices;
   const fetchTimeout = fetchTimeoutServices;
@@ -27,14 +28,15 @@ const optionsByBusinessUnits = async (
       const options: RequestInit = {
         method: "GET",
         headers: {
-          "X-Action": "SearchOptionsStaffPortalByBusinessUnit",
+          "X-Action": "SearchOptionForStaff",
           "Content-type": "application/json; charset=UTF-8",
+           "X-User-Name": userAccount,
         },
         signal: controller.signal,
       };
 
       const res = await fetch(
-       `${enviroment.IVITE_ISAAS_QUERY_PROCESS_SERVICE}/staff-portals-by-business-manager?${queryParams.toString()}`,
+       `${enviroment.IPORTAL_STAFF_QUERY_PROCESS_SERVICE}/staffs?${queryParams.toString()}`,
         options
       );
 

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Icon } from "@inubekit/inubekit";
 
+import { AppContext } from "@context/AppContext";
 import { IActions, IBreakpoint } from "@components/data/Table/props";
 import { tokens } from "@design/tokens";
 import { DetailModal } from "@components/modals/DetailModal";
@@ -11,7 +12,6 @@ import { processRequirement } from "@services/processRequirements/postProcessReq
 import { IData } from "@components/modals/requirementsModal/types";
 import { labelsDetailsOnDemand } from "../../config/card.config";
 import { dataTablesDetailsConfig } from "./config/tablesDetails.config";
-import { AppContext } from "@src/context/AppContext";
 
 interface IDetailsOnDemandProps {
   data: IActions;

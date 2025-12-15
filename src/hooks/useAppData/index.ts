@@ -1,7 +1,7 @@
 
 import { usePortalData } from "../usePortalData";
 import { useBusinessManagers } from "../useBusinessManagers";
-import { useAuthRedirect } from "../useAuthRedirect";
+import { useAuthRedirect } from "../authentication/useAuthRedirect";
 
 const useAppData = (
   portalCode: string | null,
@@ -19,7 +19,6 @@ const useAppData = (
       errorCode: errorCodePortal,
     } = usePortalData(portalCode);
 
-    console.log({portalData});
     const {
       businessManagersData,
       hasError: businessError,

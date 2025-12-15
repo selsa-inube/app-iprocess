@@ -1,11 +1,8 @@
-import { ThemeProvider } from "styled-components";
 import {
   MdInfoOutline,
 } from "react-icons/md";
 import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryFn } from "@storybook/react";
-
-import { theme } from "@config/theme";
 import { Tooltip, TooltipProps } from "..";
 
 const meta: Meta<typeof Tooltip> = {
@@ -22,9 +19,9 @@ const meta: Meta<typeof Tooltip> = {
 
 const Template: StoryFn<TooltipProps> = (args) => {
   return (
-    <ThemeProvider theme={theme}>
+
       <Tooltip {...args} />
-    </ThemeProvider>
+
   );
 };
 

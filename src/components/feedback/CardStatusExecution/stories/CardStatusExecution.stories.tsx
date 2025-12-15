@@ -1,10 +1,7 @@
-import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { Meta, StoryFn } from "@storybook/react";
 import { Icon } from "@inubekit/inubekit";
-
-import { theme } from "@config/theme";
 import { CardStatusExecution, CardStatusExecutionProps } from "..";
 
 const meta: Meta<typeof CardStatusExecution> = {
@@ -55,9 +52,7 @@ const dataWithError = {
 
 const Template: StoryFn<CardStatusExecutionProps> = (args) => {
   return (
-    <ThemeProvider theme={theme}>
       <CardStatusExecution {...args} />
-    </ThemeProvider>
   );
 };
 

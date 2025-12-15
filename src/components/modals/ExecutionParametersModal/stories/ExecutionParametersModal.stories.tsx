@@ -2,11 +2,7 @@ import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryFn } from "@storybook/react";
 import { Button } from "@inubekit/inubekit";
-
-import { theme } from "@config/theme";
 import { ExecutionParametersModal, ExecutionParametersModalProps } from "..";
-import { ThemeProvider } from "styled-components";
-
 
 const data = {
   id: "10",
@@ -127,12 +123,10 @@ const TemplateThemed: StoryFn<ExecutionParametersModalProps> = (args) => {
     <>
       <Button onClick={() => setShowModal(true)}>Show Modal</Button>
       {showModal && (
-        <ThemeProvider theme={theme}>
           <ExecutionParametersModal
             {...args}
             onCloseModal={() => setShowModal(false)}
           />
-        </ThemeProvider>
       )}
     </>
   );

@@ -88,7 +88,7 @@ const StyledInputContainer = styled.div<IStyledInputContainer>`
     inube.palette.neutral.N0};
     color: ${({ $isDisabled, theme }) =>
       $isDisabled
-        ? theme?.input?.content?.color?.isDisabled ||
+        ? theme?.input?.content?.color?.disabled ||
         inube.palette.neutral.N70
         : theme?.input?.content?.color?.regular ||
           inube.palette.neutral.N900};
@@ -139,7 +139,7 @@ const StyledMessageContainer = styled.div`
   margin-left: ${tokens.spacing.s200};
   pointer-events: none;
   color: ${({ theme }) =>
-    theme?.input?.message?.color?.regular || inube.palette.red.R400};
+    theme?.input?.message?.appearance || inube.palette.red.R400};
 
   & svg {
     width: 14px;

@@ -1,0 +1,69 @@
+import React from "react";
+import { MdOutlineStart } from "react-icons/md";
+import { Location } from "react-router-dom";
+import { ILinkNav } from "@inubekit/inubekit";
+import { ICardData } from "@ptypes/ICardData";
+import { actionsConfig } from "../mainActionLogout";
+
+const createNavLink = (
+  option: ICardData,
+  defaultIcon: React.ReactNode,
+  location?: Location,
+) => ({
+  id: option?.id ?? "",
+  label: option?.publicCode ?? "",
+  icon: option?.icon ?? defaultIcon,
+  path: option?.url ?? "",
+  isActive: location ? location.pathname === option?.url : false,
+});
+
+const mainNavigation = (optionsCards: ICardData[], location?: Location) => {
+  const linkNav = optionsCards.reduce<Record<string, ILinkNav>>(
+    (acc, option) => {
+      const navLink = createNavLink(option, <MdOutlineStart />, location);
+      acc[navLink.id] = navLink;
+      return acc;
+    },
+    {},
+  );
+
+  const optionsHeader = {
+    nav: {
+      reactPortalId: "portal",
+      title: "MENU",
+      sections: [
+        {
+          subtitle: "",
+          links: Object.values(linkNav),
+
+          isOpen: false,
+          onClose: () => {
+            ()=> void 0;
+          },
+          onToggle: () => {
+            ()=> void 0;
+          },
+        },
+      ],
+      actions: actionsConfig(),
+    },
+    breakpoint: "1281px",
+  };
+
+  const optionsNav = {
+    title: "MENU",
+    sections: {
+      administrate: {
+        name: "",
+        links: linkNav,
+      },
+    },
+  };
+
+  return {
+    optionsHeader,
+    optionsNav,
+  };
+};
+
+export { mainNavigation };

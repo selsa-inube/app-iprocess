@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 
-import { ProgressCardWithBarDetermined } from "@components/feedback/ProgressCardWithBarDetermined";
+import { AppContext } from "@context/AppContext";
 import { timeToCompleteProcess } from "@services/startProcess/getTimeToCompleteProcess";
+import { ProgressCardWithBarDetermined } from "@components/feedback/ProgressCardWithBarDetermined";
 import { ProgressCardWithBarIndetermined } from "@components/feedback/ProgressCardWithBarIndetermined";
 import { calculateSeconds, stringToTime } from "@pages/startProcess/utils";
-import { AppContext } from "@src/context/AppContext";
 
 interface ProgressOfStartProcessProps {
   id: string;

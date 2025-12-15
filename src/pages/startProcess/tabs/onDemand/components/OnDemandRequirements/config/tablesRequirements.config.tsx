@@ -35,7 +35,7 @@ const requirementsNormailzeEntries = (process: IProcessRequirementResponse[]) =>
           normalizeEvalStatusRequirementByStatus(String(entry.evaluationStatus))
             ?.appearance as appearances
         }
-        weight="strong"
+        displayIcon={false}
       />
     ),
     evaluationStatusText: entry.evaluationStatus,

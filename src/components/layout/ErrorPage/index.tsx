@@ -66,7 +66,7 @@ const ErrorPage = (props: IErrorPage) => {
           <Tag
             appearance={ComponentAppearance.GRAY}
             label={`${errorLabels.codeLabel} ${errorCode}`}
-            weight="strong"
+            displayIcon={false}
           />
         </Stack>
         <StyledErrorImage

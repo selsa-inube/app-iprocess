@@ -1,9 +1,5 @@
-import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
-import { action } from "@storybook/addon-actions";
 import { Meta, StoryFn } from "@storybook/react";
-
-import { theme } from "@config/theme";
 import { PeriodsOptionsList, PeriodsOptionsListProps } from "./index";
 
 const meta: Meta<typeof PeriodsOptionsList> = {
@@ -26,9 +22,7 @@ const options = [
 
 const Template: StoryFn<PeriodsOptionsListProps> = (args) => {
   return (
-    <ThemeProvider theme={theme}>
       <PeriodsOptionsList {...args} />
-    </ThemeProvider>
   );
 };
 
@@ -36,7 +30,7 @@ export const Default: StoryFn<PeriodsOptionsListProps> = Template.bind({});
 Default.args = {
   options,
   selectedOption: "",
-  handleOptionClick: action("handleOptionClick"),
+  handleOptionClick: ()=> void 0,
 };
 
 export default meta;

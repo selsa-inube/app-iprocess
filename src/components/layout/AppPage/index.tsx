@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { MdOutlineChevronRight } from "react-icons/md";
-import { useAuth0 } from "@auth0/auth0-react";
 import {
   useMediaQuery,
   Stack,
@@ -13,32 +12,25 @@ import {
   Nav,
 } from "@inubekit/inubekit";
 
-import { actionsConfig, navConfig, userMenu } from "@config/nav";
+import { userMenu } from "@config/nav";
 import { AppContext } from "@context/AppContext";
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
 import { decrypt } from "@utils/encrypt";
-import { useOptionsByBusinessunits } from "@hooks/useOptionsByBusinessunits";
 import { tokens } from "@design/tokens";
+import { RenderLogo } from "@components/feedback/renderLogo";
+import { actionsConfig } from "@config/mainActionLogout";
+import { mainNavigation } from "@config/mainNavigation";
 import {
   StyledAppPage,
   StyledCollapse,
   StyledCollapseIcon,
   StyledContainer,
-  StyledContentImg,
   StyledHeaderContainer,
-  StyledLogo,
   StyledMain,
 } from "./styles";
 import { ErrorPage } from "../ErrorPage";
-
-const renderLogo = (imgUrl: string) => {
-  return (
-    <StyledContentImg to="/">
-      <StyledLogo src={imgUrl} />
-    </StyledContentImg>
-  );
-};
+import { useOptionsByBusinessUnit } from "@hooks/useOptionsByBusinessunits";
 
 function AppPage() {
   const {
@@ -47,7 +39,6 @@ function AppPage() {
     setBusinessUnitSigla,
     businessUnitSigla,
   } = useContext(AppContext);
-  const { logout } = useAuth0();
   const [collapse, setCollapse] = useState(false);
   const collapseMenuRef = useRef<HTMLDivElement>(null);
   const businessUnitChangeRef = useRef<HTMLDivElement>(null);
@@ -55,10 +46,10 @@ function AppPage() {
   const portalId = localStorage.getItem("portalCode");
   const staffPortalId = portalId ? decrypt(portalId) : "";
 
-  const { optionsCards, loading } = useOptionsByBusinessunits(
+  const { optionsCards, loading } = useOptionsByBusinessUnit({
     staffPortalId,
-    businessUnitSigla
-  );
+    businessUnit: businessUnitSigla,
+  });
 
   const navigate = useNavigate();
   const isTablet = useMediaQuery("(max-width: 849px)");
@@ -79,6 +70,8 @@ function AppPage() {
 
   const location = useLocation();
 
+  const { optionsHeader, optionsNav } = mainNavigation(optionsCards, location);
+
   return (
     <StyledAppPage>
       {loading ? (
@@ -98,13 +91,12 @@ function AppPage() {
             <Grid templateRows="auto 1fr" height="100vh" justifyContent="unset">
               <StyledHeaderContainer>
                 <Header
-                  portalId="portal"
-                  navigation={navConfig(optionsCards)}
+                  navigation={optionsHeader}
                   user={{
                     username: appData.user.userName,
-                    breakpoint: "848px",
+                    breakpoint: "1281px",
                   }}
-                  logoURL={renderLogo(appData.businessUnit.urlLogo)}
+                  logoURL={RenderLogo({ imgUrl: appData.businessUnit.urlLogo })}
                   menu={userMenu}
                 />
               </StyledHeaderContainer>
@@ -141,13 +133,7 @@ function AppPage() {
                   height={"95vh"}
                 >
                   {!isTablet && optionsCards && (
-                    <Nav
-                      navigation={
-                        navConfig(optionsCards, location as unknown as Location)
-                          .items
-                      }
-                      actions={actionsConfig(logout)}
-                    />
+                    <Nav navigation={optionsNav} actions={actionsConfig()} />
                   )}
                   <StyledMain>
                     <Outlet />

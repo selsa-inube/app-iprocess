@@ -35,7 +35,7 @@ const requirementsNormailzeEntries = (process: IProcessRequirementResponse[]) =>
             String(entry.evaluationStatus)
           )?.appearance as ITagAppearance) || "light"
         }
-        weight="strong"
+        displayIcon={false}
       />
     ),
     evaluationStatusText: entry.evaluationStatus,

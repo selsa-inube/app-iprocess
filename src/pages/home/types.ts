@@ -1,9 +1,10 @@
 interface ICardData {
-  id: string;
-  label: string;
-  description: string;
-  icon: string | JSX.Element;
+  publicCode: string;
   url: string;
+  icon?: string | React.ReactNode;
+  id?: string;
+  label?: string;
+  description?: string;
 }
 
 export type { ICardData };

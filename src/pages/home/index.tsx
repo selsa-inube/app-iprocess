@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 
-import { useOptionsByBusinessunits } from "@hooks/useOptionsByBusinessunits";
 import { AppContext } from "@context/AppContext";
+import { useOptionsByBusinessUnit } from "@hooks/useOptionsByBusinessunits";
 import { decrypt } from "@utils/encrypt";
 import { HomeUI } from "./interface";
 
@@ -11,9 +11,9 @@ function Home() {
   const portalId = localStorage.getItem("portalCode");
   const staffPortalId = portalId ? decrypt(portalId) : "";
 
-  const { optionsCards, loading } = useOptionsByBusinessunits(
-    staffPortalId,
-    businessUnitSigla
+  const { optionsCards, loading } = useOptionsByBusinessUnit(
+  {  staffPortalId,
+    businessUnit: businessUnitSigla}
   );
 
   return (

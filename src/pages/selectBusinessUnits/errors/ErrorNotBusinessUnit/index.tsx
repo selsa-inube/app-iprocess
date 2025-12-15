@@ -1,10 +1,10 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import { useIAuth } from "@inube/iauth-react";
 import { ErrorPage } from "@components/layout/ErrorPage";
+import { useClearLocalStorage } from "@hooks/authentication/useClearLocalStorage";
 import { enviroment } from "@config/environment";
-import { useClearLocalStorage } from "@hooks/useClearLocalStorage";
 
 function ErrorNotBusinessUnit() {
-   const { logout } = useAuth0();
+  const { logout } = useIAuth();
 
   useClearLocalStorage();
 

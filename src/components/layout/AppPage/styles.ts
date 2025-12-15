@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { tokens } from "@design/tokens";
@@ -38,13 +37,6 @@ const StyledMain = styled.main`
 const StyledHeaderContainer = styled.div`
     position: relative;
 `;
-const StyledContentImg = styled(Link)`
-  width: 100px;
-`;
-
-const StyledLogo = styled.img`
-  max-width: 100px;
-`;
 
 const StyledCollapseIcon = styled.div<IStyledCollapseIcon>`
   display: flex;
@@ -65,8 +57,6 @@ export {
   StyledAppPage,
   StyledContainer,
   StyledHeaderContainer,
-  StyledContentImg,
-  StyledLogo,
   StyledMain,
   StyledCollapseIcon,
   StyledCollapse

@@ -1,46 +1,45 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { inube } from "@inubekit/inubekit";
 import { tokens } from "@design/tokens";
+import { tokensAppCard } from "./tokens";
 
-const StyledAppCard = styled(Link)`
+interface IStyledAppCard {
+  $isMobile: boolean;
+}
+
+const StyledAppCard = styled(Link)<IStyledAppCard>`
   box-sizing: border-box;
-  padding: ${tokens.spacing.s300};
-  height: 170px;
-  width: 250px;
+  padding: ${`${tokens.spacing.s150} ${tokens.spacing.s300}`};
+  height: 130px;
+  width: ${({ $isMobile }) => ($isMobile ? "296px" : "305px")};
+  min-height: ${({ $isMobile }) => $isMobile && "100px"};
+  gap: ${tokens.spacing.s150};
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  border-radius: ${tokens.spacing.s050};
+  border-radius: ${tokens.spacing.s100};
   text-decoration: none;
-  color: ${({ theme }) =>
-    theme?.color?.stroke.dark.regular || inube.palette.neutral.N900};
-  border: 1px solid
+  background-color: ${({ theme }) =>
+    theme?.appCard.background.color.regular ??
+    tokensAppCard.background.color.regular};
+  box-shadow: 1px 1px 4px 3px
     ${({ theme }) =>
-      theme?.color?.stroke.dark.regular || inube.palette.neutral.N30};
-  box-shadow: 3px 3px 5px 1px
-    ${({ theme }) =>
-      theme?.color?.surface?.gray?.regular || inube.palette.neutral.N30};
+      theme?.appCard.boxShadow.color.regular ??
+      tokensAppCard.boxShadow.color.regular};
   cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) =>
-      theme?.color?.surface?.gray?.regular || inube.palette.neutral.N30};
     background-color: ${({ theme }) =>
-      theme?.color?.surface?.gray?.regular || inube.palette.neutral.N30};
+      theme?.appCard.background.color.hover ??
+      tokensAppCard.background.color.hover};
     box-shadow: none;
   }
-
-  @media (max-width: 400px) {
-    padding: ${tokens.spacing.s200};
-    width: 100%;
-    min-height: 100px;
-    gap: ${tokens.spacing.s100};
-
-    div {
+  ${({ $isMobile }) =>
+    $isMobile &&
+    `
+     div {
       gap: ${tokens.spacing.s050};
     }
-  }
+  `}
 `;
 
 export { StyledAppCard };

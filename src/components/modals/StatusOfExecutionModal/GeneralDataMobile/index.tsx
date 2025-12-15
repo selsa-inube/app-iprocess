@@ -70,8 +70,6 @@ const GeneralDataMobile = (props: GeneralDataMobileProps) => {
                 <Fieldset
                   legend=""
                   spacing="compact"
-                  type="title"
-                  size="medium"
                 >
                   <Stack
                     direction="column"

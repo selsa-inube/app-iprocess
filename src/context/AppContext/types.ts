@@ -15,7 +15,8 @@ interface IBusinessManager {
 
 interface IUser {
   userAccount: string;
-  userName: string;
+  userName: string;  
+  identificationDocumentNumber?: string;
 }
 
 interface IBusinessUnit {

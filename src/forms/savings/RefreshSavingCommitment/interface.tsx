@@ -60,7 +60,7 @@ const RefreshSavingCommitmentUI = (props: RefreshSavingCommitmentUIProps) => {
               <Text type="label" size="large">
                 Descripción sugerida
               </Text>
-              <Fieldset legend="" spacing="compact" type="title" size="medium">
+              <Fieldset legend="" spacing="compact">
                 <Text>{String(data?.descriptionSuggested)}</Text>
               </Fieldset>
             </StyledField>

@@ -1,0 +1,608 @@
+import { inube } from "@inubekit/inubekit";
+const sistemasenlinea = {
+  color: {
+    text: {
+      primary: {
+        regular: "B400",
+        hover: "B300",
+        disabled: "N70",
+      },
+      error: {
+        regular: "R400",
+        hover: "R300",
+        disabled: "N70",
+      },
+      warning: {
+        regular: "Y400",
+        hover: "Y300",
+        disabled: "N70",
+      },
+      success: {
+        regular: "G400",
+        hover: "G300",
+        disabled: "N70",
+      },
+      help: {
+        regular: "P400",
+        hover: "P300",
+        disabled: "N70",
+      },
+      information: {
+        regular: "B400",
+        hover: "B300",
+        disabled: "N70",
+      },
+      dark: {
+        regular: "N900",
+        hover: "N500",
+        disabled: "N70",
+      },
+      gray: {
+        regular: "N300",
+        hover: "N100",
+        disabled: "N70",
+      },
+      light: {
+        regular: "N10",
+        hover: "N0",
+        disabled: "N70",
+      },
+      link: {
+        regular: "B400",
+        hover: "B300",
+        disabled: "N70",
+      },
+    },
+    surface: {
+      primary: {
+        regular: "B400",
+        hover: "B300",
+        clear: "B50",
+        disabled: "N20",
+      },
+      error: {
+        regular: "R400",
+        hover: "R300",
+        clear: "R50",
+        disabled: "N20",
+      },
+      warning: {
+        regular: "Y400",
+        hover: "Y300",
+        clear: "Y50",
+        disabled: "N20",
+      },
+      success: {
+        regular: "G400",
+        hover: "G300",
+        clear: "G50",
+        disabled: "N20",
+      },
+      information: {
+        regular: "B400",
+        hover: "B300",
+        clear: "B50",
+        disabled: "N20",
+      },
+      help: {
+        regular: "P400",
+        hover: "P300",
+        clear: "P50",
+        disabled: "N20",
+      },
+      nav: {
+        regular: "N10",
+      },
+      navLink: {
+        regular: "N0A",
+        selected: "N30",
+        hover: "N30",
+      },
+      blanket: {
+        regular: "N100A",
+      },
+      dark: {
+        regular: "N900",
+        hover: "N500",
+        clear: "N30",
+        disabled: "N20",
+      },
+      gray: {
+        regular: "N30",
+        hover: "N20",
+        clear: "N10",
+        disabled: "N20",
+      },
+      light: {
+        regular: "N10",
+        hover: "N0",
+        clear: "N0",
+        disabled: "N20",
+      },
+    },
+    stroke: {
+      primary: {
+        regular: "B400",
+        hover: "B300",
+        focus: "B300",
+        disabled: "N70,",
+      },
+      error: {
+        regular: "R400",
+        hover: "R300",
+        disabled: "N70,",
+      },
+      warning: {
+        regular: "Y400",
+        hover: "Y300",
+        disabled: "N70,",
+      },
+      success: {
+        regular: "G400",
+        hover: "G300",
+        disabled: "N70,",
+      },
+      information: {
+        regular: "B400",
+        hover: "B300",
+        disabled: "N70,",
+      },
+      help: {
+        regular: "P400",
+        hover: "P300",
+        disabled: "N70,",
+      },
+      divider: {
+        regular: "N40,",
+      },
+      spinner: {
+        regular: "N30",
+        transparent: "N0A",
+      },
+      dark: {
+        regular: "N900",
+        hover: "N500",
+        disabled: "N70,",
+      },
+      gray: {
+        regular: "N200",
+        hover: "N90",
+        disabled: "N70",
+      },
+      light: {
+        regular: "N10",
+        hover: "N0",
+        disabled: "N70",
+      },
+      link: {
+        regular: "B400",
+        hover: "B300",
+        disabled: "N70,",
+      },
+    },
+  },
+  icon: {
+    primary: {
+      content: {
+        color: {
+          regular: inube.palette.blue.B400,
+          disabled: inube.palette.neutral.N90,
+          hover: inube.palette.blue.B300,
+        },
+      },
+      background: {
+        color: {
+          regular: inube.palette.blue.B400,
+          disabled: inube.palette.neutral.N20,
+          hover: inube.palette.blue.B300,
+        },
+      },
+      contrast: {
+        color: {
+          regular: inube.palette.neutral.N10,
+          disabled: inube.palette.neutral.N90,
+          hover: inube.palette.neutral.N10,
+        },
+      },
+    },
+  },
+  button: {
+    primary: {
+      content: {
+        color: {
+          regular: inube.palette.blue.B400,
+          disabled: inube.palette.neutral.N20,
+          hover: inube.palette.blue.B300,
+        },
+      },
+      border: {
+        color: {
+          regular: inube.palette.blue.B400,
+          disabled: inube.palette.neutral.N70,
+          hover: inube.palette.blue.B300,
+        },
+      },
+      contrast: {
+        appearance: "light",
+      },
+    },
+    success: {
+      content: {
+        color: {
+          regular: inube.palette.green.G400,
+          disabled: inube.palette.neutral.N20,
+          hover: inube.palette.green.G300,
+        },
+      },
+      border: {
+        color: {
+          regular: inube.palette.green.G400,
+          disabled: inube.palette.neutral.N70,
+          hover: inube.palette.green.G300,
+        },
+      },
+      contrast: {
+        appearance: "light",
+      },
+    },
+    warning: {
+      content: {
+        color: {
+          regular: inube.palette.yellow.Y400,
+          disabled: inube.palette.neutral.N20,
+          hover: inube.palette.yellow.Y300,
+        },
+      },
+      border: {
+        color: {
+          regular: inube.palette.yellow.Y400,
+          disabled: inube.palette.neutral.N70,
+          hover: inube.palette.yellow.Y300,
+        },
+      },
+      contrast: {
+        appearance: "dark",
+      },
+    },
+    danger: {
+      content: {
+        color: {
+          regular: inube.palette.red.R400,
+          disabled: inube.palette.neutral.N20,
+          hover: inube.palette.red.R300,
+        },
+      },
+      border: {
+        color: {
+          regular: inube.palette.red.R400,
+          disabled: inube.palette.neutral.N70,
+          hover: inube.palette.red.R300,
+        },
+      },
+      contrast: {
+        appearance: "light",
+      },
+    },
+    help: {
+      content: {
+        color: {
+          regular: inube.palette.purple.P400,
+          disabled: inube.palette.neutral.N20,
+          hover: inube.palette.purple.P300,
+        },
+      },
+      border: {
+        color: {
+          regular: inube.palette.purple.P400,
+          disabled: inube.palette.neutral.N70,
+          hover: inube.palette.purple.P300,
+        },
+      },
+      contrast: {
+        appearance: "light",
+      },
+    },
+    dark: {
+      content: {
+        color: {
+          regular: inube.palette.neutral.N900,
+          disabled: inube.palette.neutral.N20,
+          hover: inube.palette.neutral.N500,
+        },
+      },
+      border: {
+        color: {
+          regular: inube.palette.neutral.N900,
+          disabled: inube.palette.neutral.N70,
+          hover: inube.palette.neutral.N500,
+        },
+      },
+      contrast: {
+        appearance: "light",
+      },
+    },
+    gray: {
+      content: {
+        color: {
+          regular: inube.palette.neutral.N20,
+          disabled: inube.palette.neutral.N20,
+          hover: inube.palette.neutral.N30,
+        },
+      },
+      border: {
+        color: {
+          regular: inube.palette.neutral.N200,
+          disabled: inube.palette.neutral.N70,
+          hover: inube.palette.neutral.N90,
+        },
+      },
+      contrast: {
+        appearance: "gray",
+      },
+    },
+    light: {
+      content: {
+        color: {
+          regular: inube.palette.neutral.N20,
+          disabled: inube.palette.neutral.N20,
+          hover: inube.palette.neutral.N0,
+        },
+      },
+      border: {
+        color: {
+          regular: inube.palette.neutral.N20,
+          disabled: inube.palette.neutral.N70,
+          hover: inube.palette.neutral.N0,
+        },
+      },
+      contrast: {
+        appearance: "dark",
+      },
+    },
+  },
+  assisted: {
+    title: {
+      appearance: "dark",
+    },
+    description: {
+      appearance: "gray",
+    },
+    track: {
+      color: inube.palette.neutral.N30,
+    },
+    bar: {
+      color: inube.palette.blue.B400,
+    },
+    background: {
+      color: inube.palette.neutral.N10,
+    },
+    button: {
+      appearance: "primary",
+    },
+    step: {
+      color: inube.palette.blue.B400,
+    },
+  },
+  text: {
+    primary: {
+      content: {
+        color: {
+          regular: inube.palette.blue.B400,
+          disabled: inube.palette.neutral.N90,
+          hover: inube.palette.blue.B300,
+        },
+      },
+    },
+  },
+  input: {
+    border: {
+      color: {
+        regular: inube.palette.neutral.N40,
+        disabled: inube.palette.neutral.N40,
+        focus: inube.palette.blue.B300,
+        invalid: inube.palette.red.R400,
+      },
+    },
+    background: {
+      color: {
+        regular: inube.palette.neutral.N0,
+        disabled: inube.palette.neutral.N10,
+      },
+    },
+    content: {
+      color: {
+        regular: inube.palette.neutral.N900,
+        disabled: inube.palette.neutral.N70,
+      },
+    },
+    placeholder: {
+      color: {
+        regular: inube.palette.neutral.N300,
+      },
+    },
+    message: {
+      appearance: "danger",
+    },
+    required: {
+      appearance: "danger",
+    },
+    option: {
+      appearance: {
+        regular: "dark",
+        hover: "primary",
+      },
+      background: {
+        regular: inube.palette.neutral.N0,
+        hover: inube.palette.neutral.N30,
+      },
+    },
+  },
+  label: {
+    content: {
+      color: {
+        regular: "dark",
+        disabled: "dark",
+        focus: "primary",
+        invalid: "danger",
+      },
+    },
+  },
+  tabs: {
+    content: {
+      appearance: {
+        selected: "primary",
+      },
+    },
+  },
+  BoxContainer: {
+    light: {
+      border: {
+        color: inube.palette.neutral.N0,
+      },
+      background: {
+        color: inube.palette.neutral.N0,
+      },
+      boxShadow: {
+        color: inube.palette.neutral.N0,
+      },
+    },
+    gray: {
+      border: {
+        color: inube.palette.neutral.N10,
+      },
+      background: {
+        color: inube.palette.neutral.N10,
+      },
+      boxShadow: {
+        color: inube.palette.neutral.N10,
+      },
+    },
+    dark: {
+      border: {
+        color: inube.palette.neutral.N40,
+      },
+      background: {
+        color: inube.palette.neutral.N40,
+      },
+      boxShadow: {
+        color: inube.palette.neutral.N40,
+      },
+    },
+    primary: {
+      border: {
+        color: inube.palette.blue.B300,
+      },
+      background: {
+        color: inube.palette.blue.B300,
+      },
+      boxShadow: {
+        color: inube.palette.blue.B300,
+      },
+    },
+    danger: {
+      border: {
+        color: inube.palette.red.R400,
+      },
+      background: {
+        color: inube.palette.red.R50,
+      },
+      boxShadow: {
+        color: inube.palette.red.R50,
+      },
+    },
+  },
+  appCard: {
+    boxShadow: {
+      color: {
+        regular: inube.palette.neutral.N30,
+      },
+    },
+    background: {
+      color: {
+        regular: inube.palette.neutral.N0,
+        hover: inube.palette.neutral.N20,
+      },
+    },
+  },
+  progressBar: {
+    primary: {
+      animation: { color: inube.palette.blue.B50 },
+      background: { color: inube.palette.blue.B400 },
+      border: { color: inube.palette.neutral.N40 },
+      track: { color: inube.palette.neutral.N10 },
+    },
+    success: {
+      animation: { color: inube.palette.green.G50 },
+      background: { color: inube.palette.green.G400 },
+      border: { color: inube.palette.neutral.N40 },
+      track: { color: inube.palette.neutral.N10 },
+    },
+    warning: {
+      animation: { color: inube.palette.yellow.Y50 },
+      background: { color: inube.palette.yellow.Y400 },
+      border: { color: inube.palette.neutral.N40 },
+      track: { color: inube.palette.neutral.N10 },
+    },
+    danger: {
+      animation: { color: inube.palette.red.R50 },
+      background: { color: inube.palette.red.R400 },
+      border: { color: inube.palette.neutral.N40 },
+      track: { color: inube.palette.neutral.N10 },
+    },
+    help: {
+      animation: { color: inube.palette.purple.P50 },
+      background: { color: inube.palette.purple.P400 },
+      border: { color: inube.palette.neutral.N40 },
+      track: { color: inube.palette.neutral.N10 },
+    },
+    dark: {
+      animation: { color: inube.palette.neutral.N200 },
+      background: { color: inube.palette.neutral.N900 },
+      border: { color: inube.palette.neutral.N40 },
+      track: { color: inube.palette.neutral.N10 },
+    },
+    gray: {
+      animation: { color: inube.palette.neutral.N20 },
+      background: { color: inube.palette.neutral.N50 },
+      border: { color: inube.palette.neutral.N40 },
+      track: { color: inube.palette.neutral.N10 },
+    },
+    light: {
+      animation: { color: inube.palette.neutral.N0 },
+      background: { color: inube.palette.neutral.N10 },
+      border: { color: inube.palette.neutral.N40 },
+      track: { color: inube.palette.neutral.N50 },
+    },
+  },
+  optionsPeriod: {
+    border: {
+      color: {
+        regular: inube.palette.neutral.N0,
+        focus: inube.palette.blue.B300,
+      },
+    },
+    background: {
+      color: {
+        regular: inube.palette.neutral.N0,
+        selected: inube.palette.neutral.N30,
+      },
+    },
+    content: {
+      color: {
+        regular: inube.palette.neutral.N900,
+        disabled: inube.palette.neutral.N70,
+      },
+    },
+    optionList: {
+      appearance: {
+        regular: "dark",
+        expanded: "primary",
+      },
+      background: {
+        selected: inube.palette.neutral.N30,
+      },
+    },
+  },
+};
+
+export { sistemasenlinea };

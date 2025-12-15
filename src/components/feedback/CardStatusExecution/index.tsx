@@ -57,7 +57,7 @@ const CardStatusExecution = (props: CardStatusExecutionProps) => {
                     entries?.executionStatusByPerson || "light"
                   )?.appearance as ITagAppearance) || "light"
                 }
-                weight="strong"
+                displayIcon={false}
               />
             </>
           )}

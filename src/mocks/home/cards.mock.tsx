@@ -1,22 +1,21 @@
-import { MdVpnKey } from "react-icons/md";
-
 import { ICardData } from "@pages/home/types";
-import catalogs from "@assets/images/catalogs.svg";
 
 const mockAppCards: ICardData[] = [
-  {
-    id: "privilegios",
-    label: "Privilegios",
-    description: "Modifica las propiedades y permisos de tu cuenta.",
-    icon: <MdVpnKey />,
-    url: "/privileges",
+ {
+    publicCode: "Líneas de Crédito",
+    url: "/credit-lines",
   },
   {
-    id: "catalogs",
-    label: "Catálogos Generales",
-    description: "Modifica los catálogos generales.",
-    icon: <img src={catalogs} alt="catalogs" width="25" height="25" />,
-    url: "/catalogs",
+    publicCode: "Destinos de dinero",
+    url: "/money-destination",
+  },
+  {
+    publicCode: "Nóminas de convenio",
+    url: "/payroll-agreement",
+  },
+  {
+    publicCode: "Politicas generales de credito",
+    url: "/general-credit-policies",
   },
 ];
 

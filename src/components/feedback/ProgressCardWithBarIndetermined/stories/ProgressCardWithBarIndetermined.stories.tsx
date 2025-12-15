@@ -1,16 +1,12 @@
 import { BrowserRouter } from "react-router-dom";
 import { useState } from "react";
-import { ThemeProvider } from "styled-components";
 import { Meta, StoryFn } from "@storybook/react";
 import { Button } from "@inubekit/inubekit";
-
+import { appearances } from "@components/feedback/ProgressCardWithBarDetermined/types";
 import {
   ProgressCardWithBarIndetermined,
   ProgressCardWithBarIndeterminedProps,
 } from "..";
-
-import { theme } from "@config/theme";
-import { appearances } from "../../ProgressCardWithBarDetermined/types";
 
 
 const meta: Meta<typeof ProgressCardWithBarIndetermined> = {
@@ -94,12 +90,10 @@ const TemplateThemed: StoryFn<ProgressCardWithBarIndeterminedProps> = (
     <>
       <Button onClick={() => setShowModal(true)}>Show Modal</Button>
       {showModal && (
-        <ThemeProvider theme={theme}>
           <ProgressCardWithBarIndetermined
             {...args}
             onCancel={() => setShowModal(false)}
           />
-        </ThemeProvider>
       )}
     </>
   );

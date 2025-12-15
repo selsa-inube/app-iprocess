@@ -1,8 +1,5 @@
-import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryFn } from "@storybook/react";
-
-import { theme } from "@config/theme";
 import { OptionItem, OptionItemProps } from "./index";
 
 const meta: Meta<typeof OptionItem> = {
@@ -19,9 +16,7 @@ const meta: Meta<typeof OptionItem> = {
 
 const Template: StoryFn<OptionItemProps> = (args) => {
   return (
-    <ThemeProvider theme={theme}>
       <OptionItem {...args} />
-    </ThemeProvider>
   );
 };
 

@@ -100,8 +100,6 @@ const ExecutionParametersModal = (props: ExecutionParametersModalProps) => {
                       <Fieldset
                         legend=""
                         spacing="compact"
-                        type="title"
-                        size="medium"
                       >
                         <Text type="body" size="medium">
                           {String(value)}

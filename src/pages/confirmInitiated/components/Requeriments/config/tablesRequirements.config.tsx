@@ -54,7 +54,7 @@ const requirementsNormailzeEntries = (entry: IlistOfRequirements[]) =>
             String(entry.requirementStatus)
           )?.appearance as appearances) || "gray"
         }
-        weight="strong"
+        displayIcon={false}
       />
     ),
     evaluationStatusText: entry.requirementStatus,

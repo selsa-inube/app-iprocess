@@ -3,20 +3,21 @@ import { IOptionsByBusinessUnits } from "@ptypes/staffPortalBusiness.types";
 const mapOptionsByBusinessUnitsApiToEntity = (
   businessUnit: Record<string, string | number | object>
 ): IOptionsByBusinessUnits => {
-  const businessUnitData: IOptionsByBusinessUnits = {
+const businessUnitData: IOptionsByBusinessUnits = {
     optionStaffId: String(businessUnit.optionStaffId),
     abbreviatedName: String(businessUnit.abbreviatedName),
     descriptionUse: String(businessUnit.descriptionUse),
     publicCode: String(businessUnit.publicCode),
-    useCaseId: String(businessUnit.useCaseId),
+    useCaseName: String(businessUnit.useCaseName),
+    iconReference: String(businessUnit.iconReference),
   };
   return businessUnitData;
 };
 
 const mapOptionsByBusinessUnitsToEntities = (
-  resend: Record<string, string | number | object>[]
+  options: Record<string, string | number | object>[]
 ): IOptionsByBusinessUnits[] => {
-  return resend.map(mapOptionsByBusinessUnitsApiToEntity);
+  return options.map(mapOptionsByBusinessUnitsApiToEntity);
 };
 export {
   mapOptionsByBusinessUnitsToEntities,

@@ -1,69 +1,44 @@
-import React from "react";
 import { MdSearch } from "react-icons/md";
-import { Stack, Text, Button, Input } from "@inubekit/inubekit";
-import { tokens } from "@design/tokens";
-
+import { Button, Searchfield, Stack, Text } from "@inubekit/inubekit";
+import { NoResultsMessage } from "@components/feedback/noResultsMessage";
 import { RadioBusinessUnit } from "@components/feedback/RadioBusinessUnit";
-import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
+import { tokens } from "@design/tokens";
+import { businessUnitsLabel } from "@config/businessUnits/businessUnitsLabel";
+import { IBusinessUnitsUI } from "@ptypes/selectBusinessUnits/IBusinessUnitsUI";
 import {
   StyledBusinessUnits,
-  StyledBusinessUnitsList,
-  StyledNoResults,
   StyledBusinessUnitsItem,
+  StyledBusinessUnitsList,
 } from "./styles";
-import {  IBusinessUnitstate } from "./types";
 
-interface BusinessUnitsUIProps {
-  businessUnits: IBusinessUnitsPortalStaff[];
-  search: string;
-  businessUnit: IBusinessUnitstate;
-  handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBussinessUnitChange: (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => void;
-  filterBusinessUnits: (
-    businessUnits: IBusinessUnitsPortalStaff[],
-    search: string
-  ) => IBusinessUnitsPortalStaff[];
-  handleSubmit: () => void;
-}
+const BusinessUnitsUI = (props: IBusinessUnitsUI) => {
+  const {
+    businessUnits,
+    search,
+    businessUnit,
+    screenMobile,
+    screenTablet,
+    handleSearchChange,
+    filterBusinessUnits,
+    handleBussinessUnitChange,
+    handleSubmit,
+  } = props;
 
-function NoResultsMessage({ search }: { search: string }) {
-  return (
-    <StyledNoResults>
-      <Text size="medium">No se encontraron resultados para "{search}".</Text>
-      <Text size="medium">
-        Por favor, intenta modificando los parámetros de búsqueda.
-      </Text>
-    </StyledNoResults>
-  );
-}
-
-function BusinessUnitsUI({
-  businessUnits,
-  search,
-  businessUnit,
-  handleSearchChange,
-  filterBusinessUnits,
-  handleBussinessUnitChange,
-  handleSubmit,
-}: BusinessUnitsUIProps) {
   const filteredBusinessUnits = filterBusinessUnits(businessUnits, search);
 
   return (
-    <StyledBusinessUnits>
+    <StyledBusinessUnits $isMobile={screenMobile}>
       <Text type="title" as="h2" textAlign="center">
-        Unidades de Negocios
+        {businessUnitsLabel.title}
       </Text>
       <Text size="medium" textAlign="center">
-        Seleccione la Unidad de Negocio
+        {businessUnitsLabel.selectUnit}
       </Text>
       <form>
         <Stack direction="column" alignItems="center" gap={tokens.spacing.s300}>
           {businessUnits.length > 5 && (
-            <Input
-              placeholder="Buscar..."
-              type="search"
+            <Searchfield
+              placeholder={businessUnitsLabel.placeholderSearch}
               name="searchBusinessUnits"
               id="searchBusinessUnits"
               value={search}
@@ -75,7 +50,11 @@ function BusinessUnitsUI({
           {filteredBusinessUnits.length === 0 && (
             <NoResultsMessage search={search} />
           )}
-          <StyledBusinessUnitsList $scroll={businessUnits.length > 5}>
+          <StyledBusinessUnitsList
+            $scroll={businessUnits.length > 5}
+            $isMobile={screenMobile}
+            $isTablet={screenTablet}
+          >
             <Stack
               direction="column"
               padding={`${tokens.spacing.s0} ${tokens.spacing.s100}`}
@@ -87,9 +66,9 @@ function BusinessUnitsUI({
                   <RadioBusinessUnit
                     name="businessUnit"
                     label={businessUnit.abbreviatedName}
-                      id={businessUnit.publicCode}
-                      value={businessUnit.abbreviatedName}
-                      logo={businessUnit.urlLogo}
+                    id={businessUnit.publicCode}
+                    value={businessUnit.abbreviatedName}
+                    logo={businessUnit.urlLogo}
                     handleChange={handleBussinessUnitChange}
                   />
                 </StyledBusinessUnitsItem>
@@ -101,12 +80,12 @@ function BusinessUnitsUI({
             disabled={businessUnit.value}
             onClick={handleSubmit}
           >
-            Continuar
+            {businessUnitsLabel.labelButton}
           </Button>
         </Stack>
       </form>
     </StyledBusinessUnits>
   );
-}
+};
 
 export { BusinessUnitsUI };

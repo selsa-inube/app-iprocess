@@ -16,7 +16,6 @@ import { userMenu } from "@config/nav";
 import { AppContext } from "@context/AppContext";
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
 import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
-import { decrypt } from "@utils/encrypt";
 import { tokens } from "@design/tokens";
 import { RenderLogo } from "@components/feedback/renderLogo";
 import { actionsConfig } from "@config/mainActionLogout";
@@ -43,11 +42,9 @@ function AppPage() {
   const collapseMenuRef = useRef<HTMLDivElement>(null);
   const businessUnitChangeRef = useRef<HTMLDivElement>(null);
   const [selectedClient, setSelectedClient] = useState<string>("");
-  const portalId = localStorage.getItem("portalCode");
-  const staffPortalId = portalId ? decrypt(portalId) : "";
 
   const { optionsCards, loading } = useOptionsByBusinessUnit({
-    staffPortalId,
+    staffPortalId: appData.portal.publicCode,
     businessUnit: businessUnitSigla,
   });
 

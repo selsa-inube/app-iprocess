@@ -11,7 +11,7 @@ import { Stack, Icon,Tag } from "@inubekit/inubekit";
 import { IProcess } from "@components/feedback/CardProcess/types";
 import { Tooltip } from "@design/feedback/Tooltip";
 import { tokens } from "@design/tokens";
-import { ComponentAppearance } from "@src/types/aparences.types";
+import { ComponentAppearance } from "@ptypes/aparences.types";
 
 const actionsStartprocess = [
   {

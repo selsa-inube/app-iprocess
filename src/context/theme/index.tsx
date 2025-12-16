@@ -4,9 +4,9 @@ import { inube } from "@inubekit/inubekit";
 import { tokensWithReference } from "@design/tokens/tokensWithReference";
 
 import { IThemeProviderWrapper } from "@ptypes/IThemeProviderWrapper";
+import { ThemeName } from "@ptypes/IThemeContextType";
 import { ITheme } from "@ptypes/context/ITheme";
 import { ThemeContext} from "./themeContext";
-import { ThemeName } from "@src/types/IThemeContextType";
 
 const ThemeProviderWrapper = ({ children }: IThemeProviderWrapper) => {
   const savedTheme =

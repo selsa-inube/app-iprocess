@@ -1,29 +1,54 @@
-import { useContext, useState } from "react";
 
-import { AppContext } from "@context/AppContext";
-import { useOptionsByBusinessUnit } from "@hooks/useOptionsByBusinessunits";
-import { decrypt } from "@utils/encrypt";
+import { useHome } from "@hooks/useHome";
+import { ICardData } from "@ptypes/home/ICardData";
 import { HomeUI } from "./interface";
 
-function Home() {
-  const { businessUnitSigla } = useContext(AppContext);
-  const [selectedClient, setSelectedClient] = useState<string>("");
-  const portalId = localStorage.getItem("portalCode");
-  const staffPortalId = portalId ? decrypt(portalId) : "";
-
-  const { optionsCards, loading } = useOptionsByBusinessUnit(
-  {  staffPortalId,
-    businessUnit: businessUnitSigla}
-  );
+const Home = () => {
+  const {
+    businessUnitChangeRef,
+    businessUnitsToTheStaff,
+    collapse,
+    collapseMenuRef,
+    selectedClient,
+    optionsCards,
+    loading,
+    appData,
+    username,
+    screenMobile,
+    screenTablet,
+    screenTabletHeader,
+    hasMultipleBusinessUnits,
+    dataExists,
+    optionsHeader,
+    padding,
+    handlelogout,
+    setCollapse,
+    handleLogoClick,
+  } = useHome();
 
   return (
     <HomeUI
-      data={optionsCards || []}
-      isLoading={loading}
+      appData={appData}
+      businessUnitChangeRef={businessUnitChangeRef}
+      businessUnitsToTheStaff={businessUnitsToTheStaff}
+      collapse={collapse}
+      collapseMenuRef={collapseMenuRef}
+      data={optionsCards as ICardData[]}
       selectedClient={selectedClient}
-      setSelectedClient={setSelectedClient}
+      setCollapse={setCollapse}
+      handleLogoClick={handleLogoClick}
+      loading={loading}
+      username={username}
+      screenMobile={screenMobile}
+      screenTablet={screenTablet}
+      screenTabletHeader={screenTabletHeader}
+      hasMultipleBusinessUnits={hasMultipleBusinessUnits}
+      dataExists={dataExists}
+      optionsHeader={optionsHeader}
+      onlogout={handlelogout}
+      padding={padding}
     />
   );
-}
+};
 
 export { Home };

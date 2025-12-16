@@ -43,7 +43,7 @@ const ApprovalModal = (props: ApprovalModalProps) => {
   }, [formik.values, setFieldEntered]);
 
   const dataComparison =
-    JSON.stringify(initialValues.observation) !==
+    JSON.stringify(formik.initialValues.observation) !==
       JSON.stringify(formik.values.observation);
 
   return (

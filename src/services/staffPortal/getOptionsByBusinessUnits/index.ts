@@ -8,8 +8,8 @@ import { mapOptionsByBusinessUnitsToEntities } from "./mappers";
 
 
 const optionsByBusinessUnits = async (
+  businessUnitPublicCode: string,
  staffPortalId: string,
- businessUnitPublicCode: string,
   userAccount: string,
 ): Promise<IOptionsByBusinessUnits[]> => {
   const maxRetries = maxRetriesServices;
@@ -19,7 +19,7 @@ const optionsByBusinessUnits = async (
     try {
         
         const queryParams = new URLSearchParams({
-            staffPortalId: staffPortalId,
+            portalPublicCode: staffPortalId,
             businessUnitPublicCode: businessUnitPublicCode,
           });
       const controller = new AbortController();

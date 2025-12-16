@@ -1,104 +1,88 @@
-import { useContext, useEffect, useRef, useState } from "react";
 import { MdOutlineChevronRight, MdOutlineDoorFront } from "react-icons/md";
-import { useMediaQuery, Text, Icon, Header } from "@inubekit/inubekit";
-
-import { AppContext } from "@context/AppContext";
-import { useOptionsByBusinessUnit } from "@hooks/useOptionsByBusinessunits";
+import { Icon, Header } from "@inubekit/inubekit";
 import { AppCard } from "@components/feedback/AppCard";
-import { userMenu } from "@config/nav";
-import { Title } from "@design/data/Title";
+import { RenderLogo } from "@components/feedback/renderLogo";
+import { BoxContainer } from "@components/layout/boxContainer";
+import { ErrorPage } from "@components/layout/ErrorPage";
 import { BusinessUnitChange } from "@design/inputs/BusinessUnitChange";
-import { IBusinessUnitsPortalStaff } from "@ptypes/staffPortalBusiness.types";
-import { ICardData } from "./types";
+import { tokens } from "@design/tokens";
+import { Title } from "@design/data/Title";
+import { homeLabels } from "@config/home/homeLabels";
+import { userMenu } from "@config/nav";
+import { IHomeUI } from "@ptypes/home/IHomeUI";
+import { ComponentAppearance } from "@ptypes/aparences.types";
 import {
   StyledCollapse,
   StyledCollapseIcon,
-  StyledContainer,
-  StyledContainerCards,
-  StyledContainerSection,
   StyledFooter,
   StyledHeaderContainer,
   StyledLogo,
   StyledTitle,
 } from "./styles";
-import { RenderLogo } from "@components/feedback/renderLogo";
-import { mainNavigation } from "@config/mainNavigation";
-import { useLocation } from "react-router-dom";
-import { decrypt } from "@utils/encrypt";
 
-interface HomeProps {
-  selectedClient: string;
-  setSelectedClient: (show: string) => void;
-  data?: ICardData[];
-  isLoading?: boolean;
-}
+const HomeUI = (props: IHomeUI) => {
+  const {
+    data,
+    appData,
+    businessUnitChangeRef,
+    businessUnitsToTheStaff,
+    collapse,
+    collapseMenuRef,
+    selectedClient,
+    loading,
+    username,
+    screenMobile,
+    screenTablet,
+    screenTabletHeader,
+    hasMultipleBusinessUnits,
+    optionsHeader,
+    dataExists,
+    padding,
+    onlogout,
+    setCollapse,
+    handleLogoClick,
+  } = props;
 
-function HomeUI(props: HomeProps) {
-  const { data, isLoading, selectedClient, setSelectedClient } = props;
-  const portalId = localStorage.getItem("portalCode");
-  const staffPortalId = portalId ? decrypt(portalId) : "";
-  const { appData, businessUnitsToTheStaff, businessUnitSigla, setBusinessUnitSigla } =
-    useContext(AppContext);
-  const [collapse, setCollapse] = useState(false);
- 
-  const collapseMenuRef = useRef<HTMLDivElement>(null);
-  const businessUnitChangeRef = useRef<HTMLDivElement>(null);
-  const isTablet = useMediaQuery("(max-width: 944px)");
-  const username = appData.user.userName.split(" ")[0];
-
-    const { optionsCards } = useOptionsByBusinessUnit({
-    staffPortalId,
-    businessUnit: businessUnitSigla,
-  });
- 
-  useEffect(() => {
-    if (appData.businessUnit.publicCode) {
-      setSelectedClient(appData.businessUnit.abbreviatedName);
-    }
-  }, [appData]);
-
-  const handleLogoClick = (businessUnit: IBusinessUnitsPortalStaff) => {
-    const selectJSON = JSON.stringify(businessUnit);
-    setBusinessUnitSigla(selectJSON);
-    setSelectedClient(businessUnit.abbreviatedName);
-    setCollapse(false);
-  };
-
-    const location = useLocation();
-
-  const { optionsHeader } = mainNavigation(optionsCards, location);
- 
   return (
     <>
-      <StyledContainer>
+      <BoxContainer
+        width="100%"
+        direction="column"
+        boxSizing="border-box"
+        padding={padding}
+        height="100vh"
+        overflowY="auto"
+        backgroundColor={ComponentAppearance.LIGHT}
+      >
         <StyledHeaderContainer>
-            <Header
-              navigation={optionsHeader}
-                  user={{
-                    username: appData.user.userName,
-                    breakpoint: "1281px",
-                  }}
-                  logoURL={RenderLogo({ imgUrl: appData.businessUnit.urlLogo })}
-              menu={userMenu}
-            />
-
-          {businessUnitsToTheStaff.length > 1 && (
+          <Header
+            navigation={optionsHeader}
+            logoURL={<RenderLogo imgUrl={appData.businessUnit.urlLogo} />}
+            user={{
+              username: appData.user.userName,
+              breakpoint: "848px",
+            }}
+            menu={userMenu}
+          />
+          {hasMultipleBusinessUnits && (
             <>
               <StyledCollapseIcon
                 $collapse={collapse}
                 onClick={() => setCollapse(!collapse)}
-                $isTablet={isTablet}
-                ref={collapseMenuRef}
+                $isTablet={screenTabletHeader}
+                ref={collapseMenuRef as React.RefObject<HTMLDivElement>}
               >
                 <Icon
                   icon={<MdOutlineChevronRight />}
-                  appearance="primary"
+                  appearance={ComponentAppearance.PRIMARY}
                   size="24px"
                   cursorHover
                 />
               </StyledCollapseIcon>
               {collapse && (
-                <StyledCollapse ref={businessUnitChangeRef}>
+                <StyledCollapse
+                  ref={businessUnitChangeRef as React.RefObject<HTMLDivElement>}
+                >
                   <BusinessUnitChange
                     businessUnits={businessUnitsToTheStaff}
                     onLogoClick={handleLogoClick}
@@ -109,54 +93,99 @@ function HomeUI(props: HomeProps) {
             </>
           )}
         </StyledHeaderContainer>
-        <StyledContainerSection>
-          <StyledTitle>
-            <Title
-              title={`Bienvenid@, ${username}`}
-              description="Selecciona una opción para empezar a ajustar la configuración de tu software Linix"
-              icon={<MdOutlineDoorFront />}
-              sizeTitle="large"
-            />
-          </StyledTitle>
-          <StyledContainerCards>
-            {isLoading ? (
-              <>
-                <AppCard
-                  label={""}
-                  description={""}
-                  icon={""}
-                  url={""}
-                  loading
+        <BoxContainer
+          alignItems="center"
+          justifyContent="center"
+          gap={tokens.spacing.s600}
+          boxSizing="border-box"
+          padding={tokens.spacing.s200}
+        >
+          <BoxContainer
+            direction="column"
+            gap={
+              screenMobile ? `${tokens.spacing.s300}` : `${tokens.spacing.s0}`
+            }
+            backgroundColor={ComponentAppearance.LIGHT}
+            maxWidth="1064px"
+            minWidth="328px"
+            boxSizing="border-box"
+          >
+            {(loading || dataExists) && (
+              <StyledTitle $isTablet={screenTablet}>
+                <Title
+                  title={`${homeLabels.welcome} ${username}`}
+                  description={homeLabels.description}
+                  icon={<MdOutlineDoorFront />}
+                  sizeTitle="large"
                 />
-              </>
-            ) : (
-              <>
-                {data && data?.length > 0 ? (
-                  data?.map((card) => (
-                    <AppCard
-                      key={card.id}
-                      label={card.label}
-                      description={card.description}
-                      icon={card.icon}
-                      url={card.url}
-                      loading={false}
-                    />
-                  ))
-                ) : (
-                  <Text type="body" size="medium">
-                    No se encontró información
-                  </Text>
-                )}{" "}
-              </>
+              </StyledTitle>
             )}
-          </StyledContainerCards>
-        </StyledContainerSection>
-      </StyledContainer>
-        <StyledFooter>
-          <StyledLogo src={appData.businessManager.urlBrand} />
-        </StyledFooter>
+            <BoxContainer
+              direction="row"
+              boxSizing="border-box"
+              justifyContent={screenTablet ? "center" : "flex-start"}
+              wrap="wrap"
+              gap={tokens.spacing.s400}
+              backgroundColor={ComponentAppearance.LIGHT}
+            >
+              <BoxContainer
+                direction="row"
+                boxSizing="border-box"
+                padding={tokens.spacing.s200}
+                justifyContent={screenTablet ? "center" : "flex-start"}
+                wrap="wrap"
+                width="100%"
+                gap={tokens.spacing.s250}
+                backgroundColor={ComponentAppearance.LIGHT}
+                borderColor={ComponentAppearance.DARK}
+                borderRadius={tokens.spacing.s100}
+              >
+                {loading ? (
+                  <AppCard
+                    label={""}
+                    description={""}
+                    icon={""}
+                    url={""}
+                    loading
+                  />
+                ) : (
+                  <>
+                    {dataExists ? (
+                      <>
+                        {data?.map((card) => (
+                          <AppCard
+                            key={card.id}
+                            label={card.publicCode}
+                            description={card.description}
+                            icon={card.icon}
+                            url={card.url}
+                            loading={false}
+                          />
+                        ))}
+                      </>
+                    ) : (
+                      <BoxContainer
+                        boxSizing="border-box"
+                        width="100%"
+                        height="100%"
+                      >
+                        <ErrorPage errorCode={500} onClick={onlogout} />
+                      </BoxContainer>
+                    )}
+                  </>
+                )}
+              </BoxContainer>
+            </BoxContainer>
+          </BoxContainer>
+        </BoxContainer>
+        {dataExists && (
+          <StyledFooter $isMobile={screenMobile}>
+            <StyledLogo src={appData.businessManager.urlBrand} />
+          </StyledFooter>
+        )}
+      </BoxContainer>
     </>
   );
-}
+};
 
 export { HomeUI };

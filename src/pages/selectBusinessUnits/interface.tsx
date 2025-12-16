@@ -1,31 +1,17 @@
 import { Outlet } from "react-router-dom";
-import { useContext } from "react";
-import { useMediaQueries, Stack, Text, Grid } from "@inubekit/inubekit";
+import { Stack, Text, Grid } from "@inubekit/inubekit";
 
-import { AppContext } from "@context/AppContext";
 import { tokens } from "@design/tokens";
+import { ISelectBusinessUnitsUI } from "@ptypes/selectBusinessUnits/ISelectBusinessUnitsUI";
 import {
   StyledWelcomeContainer,
   StyledOutletContainer,
   StyledImage,
 } from "./styles";
 
-const SelectBusinessUnitsUI = () => {
-  const {
-    "(max-width: 1100px)": screenTablet,
-    "(min-width: 1101px) and (max-width: 2200px)": screenDesktop,
-  }: { [key: string]: boolean } = useMediaQueries([
-    "(max-width: 1100px)",
-    "(min-width: 1101px) and (max-width: 2200px)",
-  ]);
+const SelectBusinessUnitsUI = (props: ISelectBusinessUnitsUI) => {
+  const { appData, screenTablet, imageWidth } = props;
 
-  const imageWidth = () => {
-    if (screenDesktop) return "240px";
-    if (screenTablet) return "200px";
-    return "160px";
-  };
-
-  const { appData } = useContext(AppContext);
   return (
     <Grid
       templateColumns={screenTablet ? "1fr" : "repeat(2, 1fr)"}
@@ -42,7 +28,12 @@ const SelectBusinessUnitsUI = () => {
           }
         >
           <Stack direction="column" alignItems="center">
-            <Text as="h1" type="headline" size="large">
+            <Text
+              as="h1"
+              type="headline"
+              size={screenTablet ? "medium" : "large"}
+              textAlign="center"
+            >
               Bienvenido a IProcess
             </Text>
           </Stack>

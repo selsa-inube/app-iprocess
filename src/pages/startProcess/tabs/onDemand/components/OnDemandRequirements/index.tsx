@@ -17,7 +17,6 @@ interface OnDemandRequirementsProps {
   plannedExecution?: Date;
   publicCode: string;
   year: number;
-  prueba?: string;
   setStatus: (status: string) => void;
 }
 

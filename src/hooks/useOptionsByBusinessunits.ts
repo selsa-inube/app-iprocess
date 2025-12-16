@@ -2,9 +2,9 @@ import { useState, useEffect, useContext, useMemo } from "react";
 
 import { AppContext } from "@context/AppContext";
 import { optionsByBusinessUnits } from "@services/staffPortal/getOptionsByBusinessUnits";
-import { IOptionsByBusinessUnits } from "@ptypes/staffPortal/IOptionsByBusinessUnits";
 import { getIcon } from "@utils/getIcon";
 import { normalizeOptionsByPublicCode } from "@utils/optionByBusinessunit";
+import { IOptionsByBusinessUnits } from "@ptypes/staffPortal/IOptionsByBusinessUnits";
 import { IUseOptionsByBusinessUnit } from "@ptypes/staffPortal/IUseOptionsByBusinessUnit";
 
 const useOptionsByBusinessUnit = (props: IUseOptionsByBusinessUnit) => {

@@ -3,6 +3,7 @@ import { Stack, Text, useMediaQueries, Button, Tag } from "@inubekit/inubekit";
 import inubeLogo from "@assets/images/logo-inube.png";
 import errorImage from "@assets/images/errorPage.png";
 import { tokens } from "@design/tokens";
+
 import { errorCodes } from "@config/errorCodes";
 import {
   StyledCompanyLogo,
@@ -13,15 +14,16 @@ import {
   StyledList,
   StyledTextErrorContainer,
 } from "./styles";
-import { ComponentAppearance } from "@ptypes/aparences.types";
-import { IErrorPage } from "@ptypes/design/IErrorPage";
 import { errorLabels } from "@config/errorLabels";
+import { errorPageLabels } from "@config/errorPageLabels";
+import { IErrorPage } from "@ptypes/design/IErrorPage";
+import { ComponentAppearance } from "@ptypes/aparences.types";
 
 const ErrorPage = (props: IErrorPage) => {
   const {
-    errorCode = errorLabels.errorCode,
-    heading = errorLabels.heading,
-    nameButton = errorLabels.nameButton,
+    errorCode = 0,
+    heading = "¡Ups! Algo salió mal...",
+    nameButton = "Regresar",
     onClick,
   } = props;
 
@@ -33,13 +35,18 @@ const ErrorPage = (props: IErrorPage) => {
   const matches = useMediaQueries(mediaQueries);
 
   const DetailsErrors = errorCodes[errorCode] ?? {
-    descriptionError: [errorLabels.descriptionError],
+     descriptionError: [errorLabels.descriptionError],
     solutionError: [errorLabels.solutionError],
   };
 
   return (
     <StyledContainer $isTablet={matches["(max-width: 1000px)"]}>
-      <Stack direction="column" gap={tokens.spacing.s500} height="100%">
+      <Stack
+        direction="column"
+        gap={tokens.spacing.s300}
+        height="100%"
+        width="100%"
+      >
         <Stack justifyContent="left" alignItems="start">
           <StyledCompanyLogo
             src={inubeLogo}
@@ -75,57 +82,63 @@ const ErrorPage = (props: IErrorPage) => {
           alt="error"
         />
         <StyledTextErrorContainer $isTablet={matches["(max-width: 770px)"]}>
-          <Stack direction="column" gap={tokens.spacing.s150} width="100%">
+          <Stack
+            direction="column"
+            gap={tokens.spacing.s150}
+            width="100%"
+            height="100%"
+          >
             <Text
               type="title"
               size="large"
               weight="bold"
               appearance={ComponentAppearance.DARK}
             >
-              {errorLabels.whatWentWrong}
+              {errorPageLabels.whatWentWrong}
             </Text>
             <StyledList>
-              {DetailsErrors.descriptionError.map(
-                (item: string, index: number) => (
-                  <StyledItem key={index}>
-                    <Text
-                      type="title"
-                      size="small"
-                      appearance={ComponentAppearance.GRAY}
-                    >
-                      {item}
-                    </Text>
-                  </StyledItem>
-                )
-              )}
+              {DetailsErrors.descriptionError.map((item, index) => (
+                <StyledItem key={index}>
+                  <Text
+                    type="title"
+                    size="small"
+                    appearance={ComponentAppearance.GRAY}
+                  >
+                    {item}
+                  </Text>
+                </StyledItem>
+              ))}
             </StyledList>
           </Stack>
 
           <StyledDividerContainer $isTablet={matches["(max-width: 1000px)"]} />
 
-          <Stack direction="column" gap={tokens.spacing.s150} width="100%">
+          <Stack
+            direction="column"
+            gap={tokens.spacing.s150}
+            width="100%"
+            height="100%"
+          >
             <Text
               type="title"
               size="large"
               weight="bold"
               appearance={ComponentAppearance.DARK}
             >
-              {errorLabels.howToFixIt}
+              {errorPageLabels.howToFixIt}
             </Text>
             <StyledList>
-              {DetailsErrors.solutionError.map(
-                (item: string, index: number) => (
-                  <StyledItem key={index}>
-                    <Text
-                      type="title"
-                      size="small"
-                      appearance={ComponentAppearance.GRAY}
-                    >
-                      {item}
-                    </Text>
-                  </StyledItem>
-                )
-              )}
+              {DetailsErrors.solutionError.map((item, index) => (
+                <StyledItem key={index}>
+                  <Text
+                    type="title"
+                    size="small"
+                    appearance={ComponentAppearance.GRAY}
+                  >
+                    {item}
+                  </Text>
+                </StyledItem>
+              ))}
             </StyledList>
             <Stack alignContent="center" justifyContent="center">
               <Button
@@ -143,7 +156,7 @@ const ErrorPage = (props: IErrorPage) => {
           size="small"
           weight="bold"
         >
-          {errorLabels.year}
+          {errorPageLabels.inube}
         </Text>
       </Stack>
     </StyledContainer>

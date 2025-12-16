@@ -3,7 +3,7 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
- 
+
 import { Landing } from "@pages/home/landing";
 import { Logout } from "@pages/login/logout";
 import { AppPage } from "@components/layout/AppPage";
@@ -21,7 +21,11 @@ const mainNavigation = createBrowserRouter(
         path="selectBusinessUnit/*"
         element={<SelectBusinessUnitsRoutes />}
       />
-      <Route path="/" element={<Landing />} errorElement={<ErrorPage />}/>
+      <Route
+        path="/"
+        element={<Landing />}
+        errorElement={<ErrorPage errorCode={1005} />}
+      />
       <Route path="/" element={<AppPage />}>
         <Route path="start-process/*" element={<StartProcessRoutes />} />
         <Route
@@ -35,8 +39,8 @@ const mainNavigation = createBrowserRouter(
         <Route path="finished/*" element={<FinishedRoutes />} />
       </Route>
       <Route path="logout" element={<Logout />} />
-    </>,
-  ),
+    </>
+  )
 );
 
 export { mainNavigation };
